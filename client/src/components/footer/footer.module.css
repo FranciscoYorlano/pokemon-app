@@ -1,0 +1,35 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #006571;
+    height: 60px;
+    padding: 0 1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer a:visited {
+    color: #006571;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #f9a826;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}

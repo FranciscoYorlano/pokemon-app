@@ -1,0 +1,109 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 60px;
+    grid-auto-rows: minmax(0, 1fr);
+    width: 100%;
+    height: 60px;
+    background-color: #f9a826;
+    color: #006571;
+}
+
+.logo {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.landingImg {
+    height: 3rem;
+    width: auto;
+}
+
+.homeImg {
+    display: none;
+}
+
+.navLinks {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.navShortLinks {
+    display: none;
+}
+
+.navLinks a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.navLinks a:visited {
+    color: #006571;
+}
+
+.search {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+.input {
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    font-weight: 400;
+    color: #495057;
+    box-shadow: none;
+    padding: 0.5rem;
+    border-radius: 0.8rem 0 0 0.8rem;
+    width: 12rem;
+    outline: none;
+}
+
+.button {
+    padding: 0.5rem;
+    border-radius: 0 0.8rem 0.8rem 0;
+    background: linear-gradient(to bottom right, #8a2be2, #4b0082);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media only screen and (max-width: 480px) {
+    /* Cambio columnas y altura */
+    .container {
+        grid-template-columns: 4rem 5rem 1fr; /* Rev*/
+        grid-template-rows: 40px;
+        height: 40px;
+    }
+
+    /* Cambio imagen con link */
+    .homeImg {
+        display: block;
+        height: 2rem;
+        width: auto;
+    }
+
+    .landingImg {
+        display: none;
+    }
+
+    /* Ocultamiento link home*/
+    .linkHome {
+        display: none;
+    }
+
+    .search {
+        justify-self: end;
+    }
+
+    .input {
+        width: 10rem;
+    }
+}

@@ -1,0 +1,118 @@
+.homeContainer {
+    min-height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #006571;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.navBar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 60px;
+    grid-auto-rows: minmax(0, 1fr);
+    width: 100%;
+    height: 60px;
+    margin-bottom: 1rem;
+    border-bottom: solid 1px#006571;
+    font-weight: 600;
+    color: #006571;
+}
+
+.filterContainer {
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    gap: 0.5rem;
+}
+
+.sortContainer {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    padding-right: 1.5rem;
+    gap: 0.5rem;
+}
+
+.navBar select {
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    outline: none;
+    color: #006571;
+    font-weight: 500;
+    background-color: #f9a826;
+}
+
+.navBarMobile {
+    display: grid;
+    grid-template-rows: 60px;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 1rem;
+    border-bottom: solid 1px#006571;
+    font-weight: 600;
+    color: #006571;
+}
+
+.topPagination {
+    display: flex;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+    .navBar span {
+        display: none;
+    }
+
+    .navBar {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 40px;
+        height: 40px;
+    }
+
+    .topPagination {
+        display: none;
+    }
+
+    .navBar select {
+        border-radius: 0.8rem;
+        padding: 0 0.1rem;
+        border: none;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        outline: none;
+        color: #006571;
+        font-weight: 500;
+        background-color: #f9a826;
+    }
+}

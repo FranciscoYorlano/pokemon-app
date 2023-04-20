@@ -1,0 +1,52 @@
+.alertWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 0 0;
+    margin-right: 0;
+}
+
+.alertContainer {
+    position: relative;
+    padding: 1rem 3rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #d4edda;
+    color: #155724;
+    margin-bottom: 1rem;
+}
+
+.alertContainer p {
+    font-size: 1.2rem;
+}
+
+.alertContainer button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: inherit;
+    background-color: transparent;
+    border: 0;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.alertContainer button span {
+    font-size: 1.5rem;
+}
+
+.alertContainer button:focus {
+    outline: 0;
+}
+
+.alertContainer p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .alertWrapper {
+        display: none;
+    }
+}

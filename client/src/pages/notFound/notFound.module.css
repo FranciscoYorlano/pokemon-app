@@ -1,0 +1,134 @@
+.notFoundContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.textContainer {
+    width: 50%;
+    padding: 0 32px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.title {
+    color: #006571;
+    font-size: 4rem;
+    margin-bottom: 24px;
+}
+
+.description {
+    color: #006571;
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+}
+
+.description a {
+    text-decoration: none;
+    color: #006571;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.description a:hover {
+    color: #f9a826;
+    text-decoration: underline;
+}
+
+.button {
+    background: linear-gradient(to bottom right, #8a2be2, #4b0082);
+    color: #ffffff;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+}
+
+.imageContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageContainer img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+@media only screen and (max-width: 480px) {
+    .notFoundContainer {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .textContainer {
+        width: 100%;
+        padding: 24px;
+        text-align: left;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .button {
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+
+    .imageContainer {
+        width: 100%;
+    }
+
+    .imageContainer img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .notFoundContainer {
+        height: auto;
+    }
+
+    .textContainer {
+        width: 100%;
+        padding: 32px;
+        text-align: left;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 24px;
+    }
+
+    .description {
+        font-size: 1.25rem;
+        margin-bottom: 32px;
+    }
+
+    .button {
+        font-size: 1.25rem;
+        padding: 16px 24px;
+    }
+
+    .imageContainer {
+        width: 100%;
+    }
+
+    .imageContainer img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}

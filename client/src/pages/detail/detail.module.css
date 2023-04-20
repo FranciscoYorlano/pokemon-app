@@ -1,0 +1,332 @@
+.detailContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #006571;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.leftContainer {
+    width: 50%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.label {
+    width: 10%;
+    box-sizing: border-box;
+    color: #006571;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.rightContainer {
+    padding: 0 3rem;
+    box-sizing: border-box;
+    text-align: center;
+    width: 50%;
+}
+
+.title {
+    color: #006571;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.description {
+    color: #006571;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.rightContainer img {
+    width: 60%;
+    height: 60%;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    margin: 0.5rem;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.rowStats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.colStats {
+    width: 50%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    display: flex;
+    gap: 1rem;
+    color: #006571;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.id {
+    box-sizing: border-box;
+    color: #006571;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.progressBar {
+    width: 90%;
+    box-sizing: border-box;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #006571;
+    border-radius: 10px;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progressValue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: bold;
+}
+
+.progressValueBlack {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #006571;
+    font-weight: bold;
+}
+
+.types {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.type {
+    color: #fff;
+    border-radius: 0.8rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.363);
+}
+
+.typesLabel {
+    font-size: 1rem;
+    color: #006571;
+}
+
+@media only screen and (max-width: 480px) {
+    .detailContainer {
+        flex-direction: column;
+        height: auto;
+        padding-bottom: 2rem;
+    }
+
+    .leftContainer,
+    .rightContainer {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .rightContainer img {
+        width: 100%;
+        height: auto;
+    }
+
+    .name {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .colStats {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0;
+        font-size: 0.8rem;
+    }
+
+    .progressBar {
+        width: 85%;
+        height: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .label {
+        width: 15%;
+        font-size: 0.8rem;
+    }
+
+    .progressValue,
+    .progressValueBlack {
+        font-size: 0.8rem;
+    }
+
+    .rowStats {
+        gap: 0.5rem;
+    }
+
+    .colStats {
+        font-size: 0.8rem;
+    }
+
+    .types {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .type {
+        font-size: 1rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .typesLabel {
+        margin-top: 1rem;
+    }
+}
+
+/* Types backgrounds */
+.normal {
+    background-color: #a8a878;
+}
+
+.fighting {
+    background-color: #c03028;
+}
+
+.flying {
+    background-color: #a890f0;
+}
+
+.poison {
+    background-color: #a040a0;
+}
+
+.ground {
+    background-color: #e0c068;
+}
+
+.rock {
+    background-color: #b8a038;
+}
+
+.bug {
+    background-color: #a8b820;
+}
+
+.ghost {
+    background-color: #705898;
+}
+
+.steel {
+    background-color: #b8b8d0;
+}
+
+.fire {
+    background-color: #f08030;
+}
+
+.water {
+    background-color: #6890f0;
+}
+
+.grass {
+    background-color: #78c850;
+}
+
+.electric {
+    background-color: #f8d030;
+}
+
+.psychic {
+    background-color: #f85888;
+}
+
+.ice {
+    background-color: #98d8d8;
+}
+
+.dragon {
+    background-color: #7038f8;
+}
+
+.dark {
+    background-color: #705848;
+}
+
+.fairy {
+    background-color: #ee99ac;
+}
+
+.unknown {
+    background-color: #68a090;
+}
+
+.shadow {
+    background-color: #404040;
+}

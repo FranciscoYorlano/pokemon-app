@@ -1,0 +1,9 @@
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 2rem;
+    grid-auto-flow: dense;
+    justify-items: center;
+    margin: 1rem;
+    min-height: 100vh;
+}
