@@ -13,6 +13,8 @@ import Detail from "./pages/detail/Detail";
 import Home from "./pages/home/Home";
 import Landing from "./pages/landing/Landing";
 import NotFound from "./pages/notFound/NotFound";
+import Signin from "./pages/signin/Signin";
+import Signup from "./pages/signup/Signup";
 
 // ======================== React Redux
 import { connect } from "react-redux";
@@ -28,6 +30,10 @@ function App(props) {
             location === "/create"
     );
 
+    const locationHeader = Boolean(
+        location !== "/" && location !== "/signin" && location !== "/signup"
+    );
+
     const showAlert = Boolean(globalError && locationAlerts);
     const showSuccessAlert = Boolean(
         globalSuccess && !globalError && locationAlerts
@@ -35,7 +41,7 @@ function App(props) {
 
     return (
         <>
-            {useLocation().pathname !== "/" && <Header />}
+            {locationHeader && <Header />}
             {showAlert && <Alert />}
             {showSuccessAlert && <SuccessAlert />}
             <Routes>
@@ -43,6 +49,8 @@ function App(props) {
                 <Route path="/home" element={<Home />} />
                 <Route path="/detail/:id" element={<Detail />} />
                 <Route path="/create" element={<Create />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
