@@ -178,7 +178,7 @@ const createNewPokemon = async (pokemon) => {
         throw new Error("Pokemon types must be exist.");
     }
 
-    // Creción de Pokemon
+    // Create Pokemon
     const newPokemon = await Pokemon.create({
         ...pokemon,
         name: pokemon.name.replace(/\s(?=\w)/g, ""),
