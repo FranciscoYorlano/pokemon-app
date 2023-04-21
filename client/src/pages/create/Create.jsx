@@ -21,12 +21,12 @@ const Create = () => {
     const [newPokemon, setNewPokemon] = useState({
         name: "",
         image: "",
-        life: null,
-        attack: null,
-        defense: null,
-        speed: null,
-        height: null,
-        weight: null,
+        life: 0,
+        attack: 0,
+        defense: 0,
+        speed: 0,
+        height: 0,
+        weight: 0,
         types: [],
     });
 
