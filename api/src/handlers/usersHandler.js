@@ -1,28 +1,45 @@
 // Controllers
-const {} = require("../controllers/usersControllers");
+const {
+    getUserByEmailController,
+    getAllUsersController,
+    createNewUserController,
+} = require("../controllers/usersControllers");
 
-// ======================== Handlers
+// ======================== User Handlers
 
-const getUserExistence = async (req, res) => {
-    const { email } = req.query;
+const getUserByEmail = async (req, res) => {
+    const userData = req.body;
 
-    res.status(200).json({ email: email });
+    try {
+        const user = await getUserByEmailController(userData);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
-const getUserById = async (req, res) => {
-    const { id } = req.params;
-
-    res.status(200).json({ id: id });
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await getAllUsersController();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
 const createNewUser = async (req, res) => {
     const user = req.body;
 
-    res.status(200).json({ user: user });
+    try {
+        const newUser = await createNewUserController(user);
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
 module.exports = {
-    getUserExistence,
-    getUserById,
+    getUserByEmail,
+    getAllUsers,
     createNewUser,
 };
