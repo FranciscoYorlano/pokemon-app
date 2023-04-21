@@ -1,13 +1,13 @@
 // Controllers
 const {
-    getUserByEmailController,
+    getUserByCredentialsController,
     getAllUsersController,
     createNewUserController,
 } = require("../controllers/usersControllers");
 
 // ======================== User Handlers
 
-const getUserByEmail = async (req, res) => {
+const getUserByCredentials = async (req, res) => {
     const userData = req.body;
 
     try {
@@ -39,7 +39,7 @@ const createNewUser = async (req, res) => {
 };
 
 module.exports = {
-    getUserByEmail,
+    getUserByCredentials,
     getAllUsers,
     createNewUser,
 };

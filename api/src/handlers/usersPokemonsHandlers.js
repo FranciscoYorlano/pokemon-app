@@ -1,30 +1,38 @@
 // Controllers
-const {} = require("../controllers/usersPokemonsControllers");
+const {
+    getUserPokemonsByUserIdController,
+    addNewUserPokemonController,
+    deleteUserPokemonController,
+} = require("../controllers/usersPokemonsControllers");
 
 // ======================== User Handlers
 
-const getUserPokemonsByUserId = (req, res) => {
-    const { userId } = req.body;
+const getUserPokemonsByUserId = async (req, res) => {
+    const { id } = req.params;
     try {
-        res.status(200).json(userId);
+        const userPokemons = await getUserPokemonsByUserIdController(id);
+        console.log(userPokemons);
+        res.status(200).json(userPokemons);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
-const addNewUserPokemon = (req, res) => {
+const addNewUserPokemon = async (req, res) => {
     const data = req.body;
     try {
-        res.status(200).json(data);
+        const status = await addNewUserPokemonController(data);
+        res.status(200).json(status);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
-const deleteUserPokemon = (req, res) => {
+const deleteUserPokemon = async (req, res) => {
     const data = req.body;
     try {
-        res.status(200).json(data);
+        const status = await deleteUserPokemonController(data);
+        res.status(200).json(status);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

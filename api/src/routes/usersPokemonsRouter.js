@@ -10,7 +10,7 @@ const {
 const usersPokemonsRouter = Router();
 
 // ======================== Pokemons Routes
-usersPokemonsRouter.get("", getUserPokemonsByUserId); // GET /userspokemons -> get all usersPokemons by user id
+usersPokemonsRouter.get("/:id", getUserPokemonsByUserId); // GET /userspokemons -> get all usersPokemons by user id
 
 usersPokemonsRouter.post("", addNewUserPokemon); // POST /userspokemons -> add new user pokemon
 

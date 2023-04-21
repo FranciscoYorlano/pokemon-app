@@ -9,7 +9,7 @@ const REGEX_PASSWORD = /^(?=.*\d)(?=.*[A-Z])(?!.*\s).{6,15}$/;
 
 // ======================== User Controllers
 
-const getUserByEmailController = async (userData) => {
+const getUserByCredentialsController = async (userData) => {
     const { email, password } = userData;
 
     // Email validations
@@ -47,21 +47,17 @@ const getAllUsersController = async () => {
 const createNewUserController = async (user) => {
     const { username, email, password } = user;
 
-    // Existance of username and email
-    const usernameFind = await User.findOne({
-        where: { username: username },
-    });
-    const userExist = !(usernameFind === null);
-
-    const emailFind = await User.findOne({
-        where: { email: email },
-    });
-    const emailExist = !(emailFind === null);
-
     // Username validations
     if (!username) {
         throw new Error("Username is required");
     } else {
+        // Existance of username and email
+        const usernameFind = await User.findOne({
+            where: { username: username },
+            attributes: ["username"],
+        });
+        const userExist = !(usernameFind === null);
+
         if (userExist) {
             throw new Error("Username is already in use.");
         } else {
@@ -77,6 +73,11 @@ const createNewUserController = async (user) => {
     if (!email) {
         throw new Error("Email is required.");
     } else {
+        const emailFind = await User.findOne({
+            where: { email: email },
+            attributes: ["username"],
+        });
+        const emailExist = !(emailFind === null);
         if (emailExist) {
             throw new Error("Email is already in use.");
         } else {
@@ -104,7 +105,7 @@ const createNewUserController = async (user) => {
 };
 
 module.exports = {
-    getUserByEmailController,
+    getUserByCredentialsController,
     getAllUsersController,
     createNewUserController,
 };
