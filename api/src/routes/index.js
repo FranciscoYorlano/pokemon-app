@@ -15,7 +15,7 @@ router.use("/types", typesRouter);
 
 router.use("/users", userRouter);
 
-router.use("userspokemons", usersPokemonsRouter);
+router.use("/userspokemons", usersPokemonsRouter);
 
 router.use("*", (req, res) => {
     res.status(404).json({ error: "not found" });
