@@ -5,7 +5,7 @@ const {
     getUserByEmail,
     getAllUsers,
     createNewUser,
-} = require("../handlers/usersHandler");
+} = require("../handlers/usersHandlers");
 
 const usersRouter = Router();
 
