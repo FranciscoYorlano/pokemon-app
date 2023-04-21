@@ -2,18 +2,18 @@ const { Router } = require("express");
 
 // Handlers requires
 const {
-    validateUserExisting,
+    getUserExistence,
     getUserById,
-    createUser,
-} = require("../handlers/userHandler");
+    createNewUser,
+} = require("../handlers/usersHandler");
 
-const userRouter = Router();
+const usersRouter = Router();
 
 // ======================== Pokemons Routes
-userRouter.get("", validateUserExisting);
+usersRouter.get("", getUserExistence); // GET /users?email=EMAIL -> email existence
 
-userRouter.get("/:id", getUserById);
+usersRouter.get("/:id", getUserById); // GET /users/:id -> User data
 
-userRouter.post("", createUser);
+usersRouter.post("", createNewUser); // POST /users/ -> create new user
 
-module.exports = pokemonsRouter;
+module.exports = usersRouter;
