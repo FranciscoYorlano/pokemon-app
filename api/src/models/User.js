@@ -12,16 +12,18 @@ module.exports = (sequelize) => {
             unique: true,
             allowNull: false,
             validate: {
-                isLowercase: true,
+                is: /^[a-z0-9_]{3,20}$/,
             },
+            // Entre 3 y 20 caracteres, solo letras minusculas, numeros y guiones bajos
         },
         email: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
             validate: {
-                isEmail: true,
+                is: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
             },
+            // Regex email
         },
         password: {
             type: DataTypes.STRING,
