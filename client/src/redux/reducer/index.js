@@ -32,6 +32,31 @@ const initialState = {
     types: [],
 };
 
+// ======================== Apply filters function
+const applyFilters = (allPokemons, byType, bySource) => {
+    let filteredPokemons = [...allPokemons];
+
+    if (byType !== "allTypes") {
+        filteredPokemons = filteredPokemons.filter((p) =>
+            p.types.includes(byType)
+        );
+    }
+
+    if (bySource !== "allSources") {
+        filteredPokemons = filteredPokemons.filter((p) => {
+            if (bySource === "dataBase") {
+                return isNaN(p.id) === true;
+            }
+            if (bySource === "pokeApi") {
+                return isNaN(p.id) === false;
+            }
+            return true;
+        });
+    }
+
+    return filteredPokemons;
+};
+
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
@@ -58,20 +83,10 @@ const rootReducer = (state = initialState, action) => {
 
         // Pokemons - SETTER, FILTER (2), ORDER, REMOVER, SETTER BY NAME
         case POKEMONS_FILTER_BY_TYPE:
-            if (action.payload === "allTypes") {
-                return {
-                    ...state,
-                    pokemons: state.allPokemons,
-                    filtersValues: {
-                        ...state.filtersValues,
-                        bySource: "allSources",
-                        byType: action.payload,
-                    },
-                };
-            }
-
-            const filteredPokemonsByType = state.pokemons.filter((p) =>
-                p.types.includes(action.payload)
+            const filteredPokemonsByType = applyFilters(
+                state.allPokemons,
+                action.payload,
+                state.filtersValues.bySource
             );
 
             return {
@@ -83,30 +98,11 @@ const rootReducer = (state = initialState, action) => {
                 },
             };
         case POKEMONS_FILTER_BY_SOURCE:
-            if (action.payload === "allSources") {
-                return {
-                    ...state,
-                    pokemons: state.allPokemons,
-                    filtersValues: {
-                        ...state.filtersValues,
-                        bySource: action.payload,
-                        byType: "allTypes",
-                    },
-                };
-            }
-
-            let filteredPokemonsBySource = {};
-
-            if (action.payload === "dataBase") {
-                filteredPokemonsBySource = state.pokemons.filter(
-                    (p) => isNaN(p.id) === true
-                );
-            }
-            if (action.payload === "pokeApi") {
-                filteredPokemonsBySource = state.pokemons.filter(
-                    (p) => isNaN(p.id) === false
-                );
-            }
+            const filteredPokemonsBySource = applyFilters(
+                state.allPokemons,
+                state.filtersValues.byType,
+                action.payload
+            );
 
             return {
                 ...state,

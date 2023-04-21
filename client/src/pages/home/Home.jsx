@@ -77,10 +77,6 @@ const Home = (props) => {
         !types.length && getAllTypes();
     }, []);
 
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [pokemons]);
-
     // Paginated
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
     const pages = [];

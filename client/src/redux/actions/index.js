@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // ======================== Env
-const BACKEND_URL = "https://pi-pokemon-backend-10-production.up.railway.app";
+const BACKEND_URL = "http://192.168.0.157:3001";
 
 // ======================== Action Types
 

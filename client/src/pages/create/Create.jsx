@@ -21,12 +21,12 @@ const Create = () => {
     const [newPokemon, setNewPokemon] = useState({
         name: "",
         image: "",
-        life: 0,
-        attack: 0,
-        defense: 0,
-        speed: 0,
-        height: 0,
-        weight: 0,
+        life: null,
+        attack: null,
+        defense: null,
+        speed: null,
+        height: null,
+        weight: null,
         types: [],
     });
 
@@ -48,10 +48,10 @@ const Create = () => {
     const navigate = useNavigate();
 
     // Get all Types
-    useEffect(() => {
-        dispatch(getAllTypes());
-    }, [dispatch]);
     const allTypes = useSelector((state) => state.types);
+    useEffect(() => {
+        !allTypes.length && dispatch(getAllTypes());
+    }, [dispatch]);
 
     // Handlers
     const handleNameChange = (event) => {
