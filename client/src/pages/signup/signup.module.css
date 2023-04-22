@@ -39,7 +39,7 @@
 .textInput {
     display: block;
     width: 100%;
-    margin: 1.5rem 0;
+
     position: relative;
 }
 
@@ -128,13 +128,24 @@ input:focus {
 }
 
 .previewContainer img {
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    height: 50%;
 }
 
-.name {
-    font-size: 2rem;
-    margin: 0.5rem;
+.infoAbove {
+    font-weight: 600;
+    color: #006571;
+    font-size: 1rem;
+}
+
+.infoAbove a {
+    color: #f9a826;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.infoAbove a:hover {
+    text-decoration: underline;
 }
 
 /* Falta pantallas ipads y revisar telefonos */

@@ -30,6 +30,8 @@ const initialState = {
     orderValue: "defaul",
     pokemonDetail: {},
     types: [],
+    isLogin: false,
+    userData: {},
 };
 
 // ======================== Apply filters function

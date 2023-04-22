@@ -1,7 +1,5 @@
 import axios from "axios";
-
-// ======================== Env
-const BACKEND_URL = "http://192.168.0.157:3001";
+import { BACKEND_BASE_URI } from "../../config";
 
 // ======================== Action Types
 
@@ -63,7 +61,7 @@ export const removeGlobalSuccess = () => {
 export const getAllPokemons = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${BACKEND_URL}/pokemons`);
+            const response = await axios.get(`${BACKEND_BASE_URI}/pokemons`);
             const pokemons = response.data;
             dispatch({ type: ALL_POKEMONS_GET, payload: pokemons });
         } catch (error) {
@@ -79,7 +77,7 @@ export const getPokemonsByName = (name) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(
-                `${BACKEND_URL}/pokemons?name=${name}`
+                `${BACKEND_BASE_URI}/pokemons?name=${name}`
             );
             const pokemons = response.data;
             dispatch({ type: POKEMONS_BY_NAME_GET, payload: pokemons });
@@ -122,7 +120,9 @@ export const removePokemons = () => {
 export const getPokemonDetail = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${BACKEND_URL}/pokemons/${id}`);
+            const response = await axios.get(
+                `${BACKEND_BASE_URI}/pokemons/${id}`
+            );
             const pokemon = response.data;
             dispatch({ type: POKEMON_DETAIL_GET, payload: pokemon });
         } catch (error) {
@@ -143,7 +143,7 @@ export const removePokemonDetail = () => {
 export const getAllTypes = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${BACKEND_URL}/types`);
+            const response = await axios.get(`${BACKEND_BASE_URI}/types`);
             const types = response.data;
             dispatch({ type: TYPES_GET, payload: types });
         } catch (error) {
@@ -159,7 +159,7 @@ export const createPokemon = (newPokemon) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(
-                `${BACKEND_URL}/pokemons`,
+                `${BACKEND_BASE_URI}/pokemons`,
                 newPokemon
             );
             const createdPokemon = response.data;
