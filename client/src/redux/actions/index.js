@@ -31,6 +31,10 @@ export const TYPES_GET = "TYPES_GET";
 // Create Pokemon
 export const CREATE_POKEMON = "CREATE_POKEMON";
 
+// Users
+export const USER_CREATE = "USER_CREATE";
+export const USER_VALIDATE = "USER_VALIDATE";
+
 // ======================== Action Creators
 export const setGlobalError = (error) => {
     return {
@@ -166,6 +170,27 @@ export const createPokemon = (newPokemon) => {
             dispatch({
                 type: CREATE_POKEMON,
                 payload: createdPokemon,
+            });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+export const createUser = (userData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(
+                `${BACKEND_BASE_URI}/users`,
+                userData
+            );
+            const newUser = response.data;
+            dispatch({
+                type: USER_CREATE,
+                payload: newUser,
             });
         } catch (error) {
             dispatch({

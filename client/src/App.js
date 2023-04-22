@@ -27,7 +27,8 @@ function App(props) {
     const locationAlerts = Boolean(
         location === "/home" ||
             location === "/detail/:id" ||
-            location === "/create"
+            location === "/create" ||
+            location === "/signup"
     );
 
     const locationHeader = Boolean(

@@ -16,6 +16,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 // ======================== Redux
+import { useDispatch } from "react-redux";
+
+import { createUser, setGlobalSuccess } from "../../redux/actions";
 
 const Signup = () => {
     // Show password
@@ -96,6 +99,8 @@ const Signup = () => {
         userData.email === "" ||
         Object.values(errors).some((error) => error !== "");
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const submitHandler = async (event) => {
         event.preventDefault();
 
@@ -108,7 +113,15 @@ const Signup = () => {
             };
             setErrors(newErrors);
         } else {
-            alert("CREATED");
+            dispatch(createUser(userData));
+            dispatch(setGlobalSuccess("User created successfully."));
+            setUserData({
+                email: "",
+                username: "",
+                password: "",
+                passwordConfirm: "",
+            });
+            navigate("/signin");
         }
         setButtonClicks((prev) => prev + 1);
     };

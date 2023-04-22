@@ -186,26 +186,24 @@ const Create = () => {
             };
             setErrors(newErrors);
         } else {
-            if (!Object.values(errors).some((error) => error !== "")) {
-                const pokemonToCreate = {
-                    ...newPokemon,
-                    types: newPokemon.types.map((type) => Number(type.id)),
-                };
-                dispatch(createPokemon(pokemonToCreate));
-                dispatch(setGlobalSuccess("Pokemon created successfully."));
-                setNewPokemon({
-                    name: "",
-                    image: "",
-                    life: 0,
-                    attack: 0,
-                    defense: 0,
-                    speed: 0,
-                    height: 0,
-                    weight: 0,
-                    types: [],
-                });
-                navigate("/home");
-            }
+            const pokemonToCreate = {
+                ...newPokemon,
+                types: newPokemon.types.map((type) => Number(type.id)),
+            };
+            dispatch(createPokemon(pokemonToCreate));
+            dispatch(setGlobalSuccess("Pokemon created successfully."));
+            setNewPokemon({
+                name: "",
+                image: "",
+                life: 0,
+                attack: 0,
+                defense: 0,
+                speed: 0,
+                height: 0,
+                weight: 0,
+                types: [],
+            });
+            navigate("/home");
         }
         setButtonClicks((prev) => prev + 1);
     };

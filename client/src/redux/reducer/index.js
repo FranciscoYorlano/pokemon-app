@@ -14,6 +14,8 @@ import {
     POKEMON_DETAIL_REMOVE,
     TYPES_GET,
     CREATE_POKEMON,
+    USER_CREATE,
+    USER_VALIDATE,
 } from "../actions";
 
 // ======================== Initial State
@@ -170,6 +172,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: [...state.allPokemons, action.payload],
                 pokemons: [...state.pokemons, action.payload],
+            };
+
+        // Users
+        case USER_CREATE:
+            return {
+                ...state,
             };
 
         default:
