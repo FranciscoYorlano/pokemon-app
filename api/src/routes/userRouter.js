@@ -12,8 +12,8 @@ const usersRouter = Router();
 // ======================== Pokemons Routes
 usersRouter.get("", getUserByCredentials); // GET /users -> Complete user
 
-usersRouter.get("/all", getAllUsers); // GET /users/all -> all users
+usersRouter.get("/all", getAllUsers); // GET /users/all -> All users
 
-usersRouter.post("", createNewUser); // POST /users/ -> create new user
+usersRouter.post("", createNewUser); // POST /users/ -> Create new user
 
 module.exports = usersRouter;

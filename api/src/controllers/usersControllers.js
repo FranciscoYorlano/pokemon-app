@@ -39,7 +39,9 @@ const getUserByCredentialsController = async (userData) => {
 };
 
 const getAllUsersController = async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({
+        attributes: ["email", "username", "id"],
+    });
 
     return users;
 };

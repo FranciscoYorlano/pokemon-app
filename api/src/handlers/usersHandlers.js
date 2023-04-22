@@ -11,7 +11,7 @@ const getUserByCredentials = async (req, res) => {
     const userData = req.body;
 
     try {
-        const user = await getUserByEmailController(userData);
+        const user = await getUserByCredentialsController(userData);
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ error: error.message });
