@@ -8,8 +8,8 @@ const {
 // ======================== User Handlers
 
 const getUserByCredentials = async (req, res) => {
-    const userData = req.body;
-
+    const { email, password } = req.query;
+    const userData = { email, password };
     try {
         const user = await getUserByCredentialsController(userData);
         res.status(200).json(user);
