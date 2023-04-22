@@ -164,7 +164,7 @@ const Create = () => {
         }
     };
 
-    let buttonDisabled =
+    const buttonDisabled =
         newPokemon.name === "" ||
         Object.values(errors).some((error) => error !== "");
 
