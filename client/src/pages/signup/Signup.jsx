@@ -225,7 +225,7 @@ const Signup = () => {
             <div className={styles.imageContainer}>
                 <img src={logo} alt="Pokemon App" />
                 <p className={styles.infoAbove}>
-                    Back <Link to="/signin">home.</Link>
+                    Back <Link to="/home">home.</Link>
                 </p>
             </div>
         </div>

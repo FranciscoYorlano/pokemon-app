@@ -16,6 +16,8 @@ import {
     CREATE_POKEMON,
     USER_CREATE,
     USER_VALIDATE,
+    USER_ERROR,
+    USER_ERROR_REMOVE,
 } from "../actions";
 
 // ======================== Initial State
@@ -32,6 +34,7 @@ const initialState = {
     orderValue: "defaul",
     pokemonDetail: {},
     types: [],
+    signInError: "",
     isLogin: false,
     userData: {},
 };
@@ -178,6 +181,24 @@ const rootReducer = (state = initialState, action) => {
         case USER_CREATE:
             return {
                 ...state,
+            };
+        case USER_VALIDATE:
+            return {
+                ...state,
+                signInError: "",
+                isLogin: true,
+                userData: action.payload,
+                signInError: "",
+            };
+        case USER_ERROR:
+            return {
+                ...state,
+                signInError: action.payload,
+            };
+        case USER_ERROR_REMOVE:
+            return {
+                ...state,
+                signInError: "",
             };
 
         default:

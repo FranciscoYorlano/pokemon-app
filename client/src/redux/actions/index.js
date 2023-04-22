@@ -34,6 +34,8 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 // Users
 export const USER_CREATE = "USER_CREATE";
 export const USER_VALIDATE = "USER_VALIDATE";
+export const USER_ERROR = "USER_ERROR";
+export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
 
 // ======================== Action Creators
 export const setGlobalError = (error) => {
@@ -198,5 +200,31 @@ export const createUser = (userData) => {
                 payload: error.response.data.error,
             });
         }
+    };
+};
+
+export const validateUser = (userData) => {
+    return async (dispatch) => {
+        try {
+            const { email, password } = userData;
+            const response = await axios.get(
+                `${BACKEND_BASE_URI}/users?email=${email}&password=${password}`
+            );
+            dispatch({
+                type: USER_VALIDATE,
+                payload: response.data,
+            });
+        } catch (error) {
+            dispatch({
+                type: USER_ERROR,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+export const removeUserError = () => {
+    return {
+        type: USER_ERROR_REMOVE,
     };
 };
