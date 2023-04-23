@@ -36,6 +36,7 @@ export const USER_CREATE = "USER_CREATE";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const USER_ERROR = "USER_ERROR";
 export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
+export const USER_SIGN_OUT = "USER_SIGN_OUT";
 
 // ======================== Action Creators
 export const setGlobalError = (error) => {
@@ -226,5 +227,11 @@ export const validateUser = (userData) => {
 export const removeUserError = () => {
     return {
         type: USER_ERROR_REMOVE,
+    };
+};
+
+export const signout = () => {
+    return {
+        type: USER_SIGN_OUT,
     };
 };

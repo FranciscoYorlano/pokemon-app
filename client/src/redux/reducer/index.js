@@ -18,6 +18,7 @@ import {
     USER_VALIDATE,
     USER_ERROR,
     USER_ERROR_REMOVE,
+    USER_SIGN_OUT,
 } from "../actions";
 
 // ======================== Initial State
@@ -199,6 +200,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 signInError: "",
+            };
+
+        case USER_SIGN_OUT:
+            return {
+                ...state,
+                isLogin: false,
+                userData: {},
             };
 
         default:
