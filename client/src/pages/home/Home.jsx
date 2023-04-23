@@ -1,5 +1,6 @@
 // ======================== Styles
 import styles from "./home.module.css";
+import homeImage from "../../assets/homeImg.jpg";
 
 // ======================== Components
 import CardContainer from "../../components/cardContainer/CardContainer";
@@ -114,6 +115,7 @@ const Home = (props) => {
 
     return (
         <div className={styles.homeContainer}>
+            <div className={styles.homeImage}></div>
             <div className={styles.navBar}>
                 <div className={styles.filterContainer}>
                     <span>Filters:</span>
