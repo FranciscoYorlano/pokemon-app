@@ -64,12 +64,12 @@ const addNewUserPokemonController = async (data) => {
         }
 
         // Pokemon save to userPokemons
-        await UsersPokemons.create({
+        const newUserPokemon = await UsersPokemons.create({
             PokemonId: pokemonId,
             UserId: userId,
         });
 
-        return { message: "Pokemon was added to the user collection." };
+        return newUserPokemon;
     } else {
         throw new Error("Api pokemons can't be added to user collection.");
     }
