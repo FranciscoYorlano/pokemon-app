@@ -221,12 +221,12 @@ const Signup = () => {
                 <p className={styles.infoAbove}>
                     Have an account? <Link to="/signin">Sign in!</Link>
                 </p>
-            </div>
-            <div className={styles.imageContainer}>
-                <img src={logo} alt="Pokemon App" />
                 <p className={styles.infoAbove}>
                     Back <Link to="/home">home.</Link>
                 </p>
+            </div>
+            <div className={styles.imageContainer}>
+                <img src={logo} alt="Pokemon App" />
             </div>
         </div>
     );

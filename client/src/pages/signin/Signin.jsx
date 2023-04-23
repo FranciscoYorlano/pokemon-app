@@ -123,12 +123,12 @@ const Signin = (props) => {
                 <p className={styles.infoAbove}>
                     Don't have an account? <Link to="/signup">Sign up!</Link>
                 </p>
-            </div>
-            <div className={styles.imageContainer}>
-                <img src={logo} alt="Pokemon App" />
                 <p className={styles.infoAbove}>
                     Back <Link to="/home">home.</Link>
                 </p>
+            </div>
+            <div className={styles.imageContainer}>
+                <img src={logo} alt="Pokemon App" />
             </div>
         </div>
     );
