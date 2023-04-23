@@ -19,6 +19,10 @@ import {
     USER_ERROR,
     USER_ERROR_REMOVE,
     USER_SIGN_OUT,
+    USER_POKEMONS_SET,
+    USER_POKEMONS_REMOVE,
+    USER_POKEMONS_ADD,
+    USER_POKEMONS_DELETE,
 } from "../actions";
 
 // ======================== Initial State
@@ -38,6 +42,7 @@ const initialState = {
     signInError: "",
     isLogin: false,
     userData: {},
+    userPokemons: [],
 };
 
 // ======================== Apply filters function
@@ -69,19 +74,19 @@ const applyFilters = (allPokemons, byType, bySource) => {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        // Global Error - SETTER, REMOVER
+        // Global Error
         case GLOBAL_ERROR_SET:
             return { ...state, globalError: action.payload };
         case GLOBAL_ERROR_REMOVE:
             return { ...state, globalError: "" };
 
-        // Global Success - SETTER, REMOVER
+        // Global Success
         case GLOBAL_SUCCESS_SET:
             return { ...state, globalSuccess: action.payload };
         case GLOBAL_SUCCESS_REMOVE:
             return { ...state, globalSuccess: "" };
 
-        // All pokemons - SETTER
+        // All pokemons
         case ALL_POKEMONS_GET:
             return {
                 ...state,
@@ -89,7 +94,7 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: action.payload,
             };
 
-        // Pokemons - SETTER, FILTER (2), ORDER, REMOVER, SETTER BY NAME
+        // Pokemons
         case POKEMONS_FILTER_BY_TYPE:
             const filteredPokemonsByType = applyFilters(
                 state.allPokemons,
@@ -160,13 +165,13 @@ const rootReducer = (state = initialState, action) => {
         case POKEMONS_BY_NAME_GET:
             return { ...state, pokemons: action.payload };
 
-        // Pokemon Detail - SETTER, REMOVER
+        // Pokemon Detail
         case POKEMON_DETAIL_GET:
             return { ...state, pokemonDetail: action.payload };
         case POKEMON_DETAIL_REMOVE:
             return { ...state, pokemonDetail: {} };
 
-        // Types - SETTER
+        // Types
         case TYPES_GET:
             return { ...state, types: action.payload };
 
@@ -207,6 +212,33 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 isLogin: false,
                 userData: {},
+                userPokemons: [],
+            };
+
+        // User Pokemons
+        case USER_POKEMONS_SET:
+            return {
+                ...state,
+                userPokemons: action.payload,
+            };
+
+        case USER_POKEMONS_REMOVE:
+            return {
+                ...state,
+                userPokemons: [],
+            };
+
+        case USER_POKEMONS_ADD:
+            return {
+                ...state,
+                userPokemons: [...state.userPokemons, action.payload],
+            };
+        case USER_POKEMONS_DELETE:
+            return {
+                ...state,
+                userPokemons: userPokemons.filter(
+                    (uP) => uP.pokemonId === action.payload
+                ),
             };
 
         default:
