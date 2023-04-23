@@ -20,6 +20,7 @@ const getUserPokemonsByUserId = async (req, res) => {
 
 const addNewUserPokemon = async (req, res) => {
     const data = req.body;
+    console.log(data);
     try {
         const status = await addNewUserPokemonController(data);
         res.status(200).json(status);
@@ -29,7 +30,8 @@ const addNewUserPokemon = async (req, res) => {
 };
 
 const deleteUserPokemon = async (req, res) => {
-    const data = req.body;
+    const { pokemonId, userId } = req.query;
+    const data = { pokemonId: pokemonId, userId: userId };
     try {
         const status = await deleteUserPokemonController(data);
         res.status(200).json(status);
