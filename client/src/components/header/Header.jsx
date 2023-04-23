@@ -64,7 +64,7 @@ const Header = (props) => {
                 <form className={styles.search} onSubmit={handleSearchsubmit}>
                     <input
                         type="text"
-                        placeholder="Search"
+                        placeholder="Search pokemon"
                         className={styles.inputSearch}
                         name="search"
                         value={name}

@@ -51,7 +51,7 @@
 
 /* RIGHT ZONE */
 .right {
-    justify-self: end;
+    justify-self: flex-end;
     display: flex;
     align-items: center;
     gap: 1rem;

@@ -106,6 +106,11 @@ const Home = (props) => {
         setCurrentPage(1);
     };
 
+    const handlePokemonsPerPageChange = (event) => {
+        setPokemonsPerPage(event.target.value);
+        setCurrentPage(1);
+    };
+
     // Order
     const handleOrder = (event) => {
         setOrder(event.target.value);
@@ -117,8 +122,8 @@ const Home = (props) => {
         <div className={styles.homeContainer}>
             <div className={styles.homeImage}></div>
             <div className={styles.navBar}>
-                <div className={styles.filterContainer}>
-                    <span>Filters:</span>
+                <div className={styles.left}>
+                    <span>Filters: </span>
                     <select value={filterType} onChange={handleFilterByType}>
                         <option value="allTypes">All types</option>
                         {types.map((type) => (
@@ -136,16 +141,7 @@ const Home = (props) => {
                         <option value="allSources">All sources</option>
                         <SelectSource pokemons={pokemons} />
                     </select>
-                </div>
-                <div className={styles.topPagination}>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        handlePageChange={handlePageChange}
-                    />
-                </div>
-                <div className={styles.sortContainer}>
-                    <span>Sort: </span>
+                    <span>Sort:</span>
                     <select value={order} onChange={handleOrder}>
                         <option value="defaul">Default</option>
                         <option value="alphabeticalAsc">
@@ -157,6 +153,24 @@ const Home = (props) => {
                         <option value="attackAsc">Attack (low to high)</option>
                         <option value="attackDesc">Attack (high to low)</option>
                     </select>
+                    <span>Show:</span>
+                    <select
+                        value={pokemonsPerPage}
+                        onChange={handlePokemonsPerPageChange}
+                    >
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div className={styles.right}>
+                    <span>{pokemons.length} results</span>
+                    <div className={styles.yLine}></div>
+                    <span>
+                        Page {currentPage}/{totalPages}
+                    </span>
                 </div>
             </div>
             {pokemons.length ? (

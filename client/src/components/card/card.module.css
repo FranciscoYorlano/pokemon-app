@@ -1,72 +1,80 @@
 .card {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom right, #8a2be3, #4b0082);
-    color: #ffffff;
-    border-radius: 0.8rem;
     overflow: hidden;
     width: 20rem;
+    height: 30rem;
+    background-color: #8a2be3;
+    background: linear-gradient(to bottom right, #8a2be3, #4b0082);
+    color: #fff;
+    border-radius: 3rem;
+    box-shadow: 0px 10px 30px rgba(23, 7, 37, 0.3);
 }
 
-@media only screen and (max-width: 480px) {
-    .card {
-        width: 24rem;
-    }
+.card a {
+    text-decoration: none;
 }
 
-.imageContainer {
-    position: relative;
-    box-shadow: 0px 2px 4px #ffffff;
-    height: 15rem;
+.card a:visited {
+    color: #fff;
 }
 
-.image {
+/* CARD IMAGE */
+.cardImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+    width: 20rem;
+    border-bottom: 1px solid #fff;
+}
+
+.cardImage img {
     width: 100%;
     height: 100%;
-    max-height: 100%;
-    transition: transform 0.2s ease-in-out;
+    object-fit: cover;
 }
 
-.imageContainer:hover .image {
-    transform: scale(1.1);
+/* CARD INFO */
+.cardName {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
-.types {
-    position: absolute;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    top: 91%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.cardTypes {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     gap: 0.5rem;
     align-items: center;
-    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .type {
-    border-radius: 0.8rem;
-    font-size: 1.1rem;
-    font-weight: 700;
+    color: #fff;
     padding: 0.25rem 0.5rem;
+    border-radius: 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.363);
 }
 
-.statValue {
-    font-size: 1.2rem;
-}
-
-.info {
+.cardStats {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.name {
-    font-size: 2rem;
-    margin: 0.5rem;
+.stat {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 0.2rem;
 }
 
 /* Types backgrounds */
