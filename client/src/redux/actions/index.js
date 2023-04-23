@@ -38,6 +38,12 @@ export const USER_ERROR = "USER_ERROR";
 export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
 export const USER_SIGN_OUT = "USER_SIGN_OUT";
 
+// Users Pokemons
+export const USER_POKEMONS_SET = "USER_POKEMONS_SET";
+export const USER_POKEMONS_REMOVE = "USER_POKEMONS_REMOVE";
+export const USER_POKEMONS_ADD = "USER_POKEMONS_ADD";
+export const USER_POKEMONS_DELETE = "USER_POKEMONS_DELETE";
+
 // ======================== Action Creators
 export const setGlobalError = (error) => {
     return {
@@ -233,5 +239,70 @@ export const removeUserError = () => {
 export const signout = () => {
     return {
         type: USER_SIGN_OUT,
+    };
+};
+
+export const getUserPokemonByUserId = (userId) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(
+                `${BACKEND_BASE_URI}/userspokemons/${userId}`
+            );
+            dispatch({
+                type: USER_POKEMONS_SET,
+                payload: response.data,
+            });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+export const removeUserPokemons = () => {
+    return {
+        type: USER_POKEMONS_REMOVE,
+    };
+};
+
+export const addPokemonToUserPokemons = (data) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(
+                `${BACKEND_BASE_URI}/userspokemons`,
+                data
+            );
+            dispatch({
+                type: USER_POKEMONS_ADD,
+                payload: response.data,
+            });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+export const deletePokemonFromUserPokemons = (data) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.delete(
+                `${BACKEND_BASE_URI}/userspokemons`,
+                data
+            );
+            dispatch({
+                type: USER_POKEMONS_DELETE,
+                payload: response.data,
+            });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
     };
 };

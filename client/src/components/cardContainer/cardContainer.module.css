@@ -7,3 +7,9 @@
     margin: 0.5rem 1rem;
     min-height: 100vh;
 }
+
+@media only screen and (max-width: 768px) {
+    .cardsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    }
+}
