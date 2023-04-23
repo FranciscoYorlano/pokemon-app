@@ -4,6 +4,6 @@
     grid-gap: 2rem;
     grid-auto-flow: dense;
     justify-items: center;
-    margin: 1rem;
+    margin: 0.5rem 1rem;
     min-height: 100vh;
 }

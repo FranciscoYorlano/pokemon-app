@@ -3,7 +3,7 @@
     flex-direction: column;
     overflow: hidden;
     width: 20rem;
-    height: 30rem;
+    height: 31rem;
     background-color: #8a2be3;
     background: linear-gradient(to bottom right, #8a2be3, #4b0082);
     color: #fff;
@@ -75,6 +75,52 @@
     align-items: center;
     color: #fff;
     gap: 0.2rem;
+}
+
+.favButton {
+    background: none;
+    cursor: pointer;
+    border: none;
+}
+
+/* 1.25 x */
+@media only screen and (max-width: 768px) {
+    .card {
+        width: 25rem;
+        height: 37.5rem;
+    }
+
+    .cardImage {
+        width: 25rem;
+        height: 25rem;
+    }
+
+    .cardName {
+        font-size: 2.5rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .cardTypes {
+        gap: 0.7rem;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .type {
+        padding: 0.3rem 0.7rem;
+        font-size: 1.25rem;
+    }
+
+    .cardStats {
+        gap: 2.5rem;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .stat {
+        gap: 0.3rem;
+    }
 }
 
 /* Types backgrounds */
