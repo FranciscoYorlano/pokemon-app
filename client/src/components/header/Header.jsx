@@ -11,10 +11,15 @@ import { useNavigate } from "react-router-dom";
 
 // ======================== React Redux
 import { connect } from "react-redux";
-import { getPokemonsByName, removePokemons } from "../../redux/actions";
+import {
+    getPokemonsByName,
+    removePokemons,
+    signout,
+} from "../../redux/actions";
 
 const Header = (props) => {
-    const { getPokemonsByName, removePokemons, isLogin, userData } = props;
+    const { getPokemonsByName, removePokemons, isLogin, userData, signout } =
+        props;
 
     // Dropdown menu
     const [showDropdown, setShowDropdown] = useState(false);
@@ -38,9 +43,9 @@ const Header = (props) => {
     };
 
     const handleButtonClick = (event) => {
-        if (event.target.id === "signIn") navigate("/signIn");
+        if (event.target.id === "signIn") navigate("/signin");
 
-        if (event.target.id === "signOut") () => {};
+        if (event.target.id === "signOut") signout();
     };
 
     return (
@@ -266,6 +271,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getPokemonsByName: (name) => dispatch(getPokemonsByName(name)),
         removePokemons: () => dispatch(removePokemons()),
+        signout: () => dispatch(signout()),
     };
 };
 

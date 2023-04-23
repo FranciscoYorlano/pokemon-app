@@ -91,9 +91,9 @@
 }
 
 .buttonPrimary {
-    background-color: #007bff;
+    background: linear-gradient(to bottom right, #8a2be3, #4b0082);
+    color: #ffffff;
     border: none;
-    color: #fff;
     padding: 0.5rem 1rem;
     text-align: center;
     text-decoration: none;
@@ -105,8 +105,7 @@
 }
 
 .buttonPrimary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
+    background: linear-gradient(to bottom right, #0069d9, #0042a8);
     color: #fff;
 }
 
@@ -223,9 +222,6 @@
     }
 }
 
-/* Links inside the dropdown */
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
 }
