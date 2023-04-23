@@ -1,8 +1,6 @@
 // ======================== Styles
 import styles from "./header.module.css";
 import logo from "../../assets/logo.png";
-import menu from "../../assets/menu.png";
-import user from "../../assets/user.png";
 
 // ======================== React Router
 import { Link } from "react-router-dom";
@@ -39,6 +37,12 @@ const Header = (props) => {
         navigate("/home");
     };
 
+    const handleButtonClick = (event) => {
+        if (event.target.id === "signIn") navigate("/signIn");
+
+        if (event.target.id === "signOut") () => {};
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
@@ -67,10 +71,26 @@ const Header = (props) => {
             <div className={styles.right}>
                 <Link to="/home">Home</Link>
                 <Link to="/create">Create</Link>
-                <div className={styles.verticalLine}></div>
-                <Link to="/create">Favorites</Link>
-                <button className={styles.buttonDanger}>Sign out</button>
-                <div className={styles.verticalLine}></div>
+                <div className={styles.yLine}></div>
+                {isLogin && <Link to="/create">Favorites</Link>}
+                {isLogin ? (
+                    <button
+                        id="signOut"
+                        className={styles.buttonDanger}
+                        onClick={handleButtonClick}
+                    >
+                        Sign out
+                    </button>
+                ) : (
+                    <button
+                        id="signIn"
+                        className={styles.buttonPrimary}
+                        onClick={handleButtonClick}
+                    >
+                        Sign in
+                    </button>
+                )}
+                <div className={styles.yLine}></div>
                 <Link to="">
                     <svg
                         width="2.5rem"
@@ -158,14 +178,14 @@ const Header = (props) => {
                         onClick={handleShowDropdown}
                         class={styles.dropdownBtn}
                     >
+                        .
                         <svg
+                            fill="#ffffff"
                             width="2rem"
                             height="2rem"
-                            viewBox="0 0 24.00 24.00"
-                            fill="none"
+                            viewBox="0 0 32 32"
+                            version="1.1"
                             xmlns="http://www.w3.org/2000/svg"
-                            stroke="#006571"
-                            stroke-width="0.00024000000000000003"
                         >
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -177,12 +197,7 @@ const Header = (props) => {
 
                             <g id="SVGRepo_iconCarrier">
                                 {" "}
-                                <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12ZM3 18C3 17.4477 3.44772 17 4 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18Z"
-                                    fill="#006571"
-                                />{" "}
+                                <path d="M0.844 6.050c-0.256-0.256-0.381-0.581-0.381-0.975s0.125-0.719 0.381-0.975 0.581-0.381 0.975-0.381h28.512c0.394 0 0.719 0.125 0.975 0.381s0.381 0.581 0.381 0.975-0.125 0.719-0.381 0.975-0.581 0.381-0.975 0.381h-28.512c-0.394 0-0.719-0.125-0.975-0.381zM31.306 14.963c0.256 0.256 0.381 0.581 0.381 0.975s-0.125 0.719-0.381 0.975-0.581 0.381-0.975 0.381h-28.512c-0.394 0-0.719-0.125-0.975-0.381s-0.381-0.581-0.381-0.975 0.125-0.719 0.381-0.975 0.581-0.381 0.975-0.381h28.512c0.394 0 0.719 0.125 0.975 0.381zM31.306 25.819c0.256 0.256 0.381 0.581 0.381 0.975s-0.125 0.719-0.381 0.975-0.581 0.381-0.975 0.381h-28.512c-0.394 0-0.719-0.125-0.975-0.381s-0.381-0.581-0.381-0.975 0.125-0.719 0.381-0.975 0.581-0.381 0.975-0.381h28.512c0.394 0 0.719 0.131 0.975 0.381z" />{" "}
                             </g>
                         </svg>
                     </button>
@@ -191,24 +206,47 @@ const Header = (props) => {
                             showDropdown && styles.show
                         }`}
                     >
-                        <div className={styles.dropdownOption}>
-                            <Link to="/home" className={styles.linkHome}>
-                                <img
-                                    src={user}
-                                    alt="Dropdown"
-                                    className={styles.menuImg}
-                                />{" "}
-                                franyorlano
+                        <div className={styles.dropdownOptionFirst}>
+                            <Link className={styles.link} to="/home">
+                                Home
                             </Link>
                         </div>
+                        <div className={styles.xLine}></div>
                         <div className={styles.dropdownOption}>
-                            <a href="#">15 cards</a>
+                            <Link className={styles.link} to="/create">
+                                Create
+                            </Link>
                         </div>
-                        <div className={styles.dropdownOption}>
-                            <a href="#">My Pokemons</a>
-                        </div>
-                        <div className={styles.dropdownOption}>
-                            <a href="#">Logout</a>
+                        {isLogin && (
+                            <>
+                                <div className={styles.xLine}></div>
+                                <div className={styles.dropdownOption}>
+                                    <Link className={styles.link} to="/create">
+                                        Favorites
+                                    </Link>
+                                </div>
+                            </>
+                        )}
+                        <div className={styles.xLine}></div>
+                        <div className={styles.dropdownOptionLast}>
+                            {isLogin && <Link to="/create">Favorites</Link>}
+                            {isLogin ? (
+                                <button
+                                    id="SignOut"
+                                    className={styles.buttonDanger}
+                                    onClick={handleButtonClick}
+                                >
+                                    Sign out
+                                </button>
+                            ) : (
+                                <button
+                                    id="SignIn"
+                                    className={styles.buttonPrimary}
+                                    onClick={handleButtonClick}
+                                >
+                                    Sign in
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
