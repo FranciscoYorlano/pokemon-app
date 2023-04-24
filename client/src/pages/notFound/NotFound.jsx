@@ -17,7 +17,7 @@ const Landing = () => {
                     been removed. Go back to <Link to="/home">Home</Link>
                 </p>
                 <Link to="/home">
-                    <button className={styles.button}>Home</button>
+                    <button className={styles.buttonPrimary}>Home</button>
                 </Link>
             </div>
             <div className={styles.imageContainer}>

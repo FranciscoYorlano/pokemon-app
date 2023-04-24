@@ -1,6 +1,6 @@
 // ======================== Styles
 import styles from "./signin.module.css";
-import logo from "../../assets/logo.png";
+import welcome from "../../assets/welcome-back.png";
 
 // ======================== Hooks
 import { useEffect, useState } from "react";
@@ -132,7 +132,7 @@ const Signin = (props) => {
                 </p>
             </div>
             <div className={styles.imageContainer}>
-                <img src={logo} alt="Pokemon App" />
+                <img src={welcome} alt="Pokemon App" />
             </div>
         </div>
     );

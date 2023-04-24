@@ -127,7 +127,7 @@ input:focus {
     cursor: not-allowed;
 }
 
-.previewContainer img {
+.imageContainer img {
     width: 50%;
     height: 50%;
 }
@@ -151,6 +151,7 @@ input:focus {
 @media only screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+        height: auto;
     }
 
     .formContainer {

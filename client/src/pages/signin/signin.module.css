@@ -128,8 +128,8 @@ input:focus {
 }
 
 .imageContainer img {
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 70%;
 }
 
 .infoAbove {
@@ -151,6 +151,7 @@ input:focus {
 @media only screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+        height: auto;
     }
 
     .formContainer {
