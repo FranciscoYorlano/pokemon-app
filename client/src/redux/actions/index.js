@@ -268,7 +268,6 @@ export const removeUserPokemons = () => {
 };
 
 export const addPokemonToUserPokemons = (data) => {
-    console.log(data);
     return async (dispatch) => {
         try {
             const response = await axios.post(

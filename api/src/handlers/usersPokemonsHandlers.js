@@ -11,7 +11,6 @@ const getUserPokemonsByUserId = async (req, res) => {
     const { id } = req.params;
     try {
         const userPokemons = await getUserPokemonsByUserIdController(id);
-        console.log(userPokemons);
         res.status(200).json(userPokemons);
     } catch (error) {
         res.status(400).json({ error: error.message });

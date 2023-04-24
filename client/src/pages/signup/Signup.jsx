@@ -33,7 +33,6 @@ const Signup = () => {
         if (!allUsers.length) {
             const response = await axios.get(`${BACKEND_BASE_URI}/users/all`);
             setAllUsers(response.data);
-            console.log(allUsers);
         }
     }, []);
 

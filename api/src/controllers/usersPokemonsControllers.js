@@ -105,7 +105,6 @@ const deleteUserPokemonController = async (data) => {
             throw new Error("Pokemon not exist.");
         }
 
-        console.log(userId, pokemonId);
         // UserPokemon verification
         const userPokemon = await UsersPokemons.findOne({
             where: { UserId: userId, PokemonId: pokemonId },

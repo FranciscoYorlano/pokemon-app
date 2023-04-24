@@ -73,7 +73,6 @@ const applyFilters = (allPokemons, byType, bySource) => {
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
-    console.log(state);
     switch (action.type) {
         // Global Error
         case GLOBAL_ERROR_SET:
