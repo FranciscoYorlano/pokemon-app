@@ -162,23 +162,20 @@ const Home = (props) => {
                     <span>Sort:</span>
                     <select value={order} onChange={handleOrder}>
                         <option value={SORTS.DEFAULT}>Default</option>
-                        <option value={SORTS.ALPHABETICAL_ASC}>
-                            Alphabetical (A-Z)
-                        </option>
-                        <option value={SORTS.ALPHABETICAL_DESC}>
-                            Alphabetical (Z-A)
-                        </option>
+                        <option value={SORTS.ALPHABETICAL_ASC}>(A-Z)</option>
+                        <option value={SORTS.ALPHABETICAL_DESC}>(Z-A)</option>
                         <option value={SORTS.ATTACK_ASC}>
-                            Attack (low to high)
+                            Attack (- to +)
                         </option>
                         <option value={SORTS.ATTACK_DESC}>
-                            Attack (high to low)
+                            Attack (+ to -)
                         </option>
                     </select>
                     <span>Show:</span>
                     <select
                         value={pokemonsPerPage}
                         onChange={handlePokemonsPerPageChange}
+                        className={styles.pageSelector}
                     >
                         <option value="10">10</option>
                         <option value="12">12</option>
@@ -188,8 +185,6 @@ const Home = (props) => {
                     </select>
                 </div>
                 <div className={styles.right}>
-                    <span>{filtersValues.byType !== ""}</span>
-                    <div className={styles.yLine}></div>
                     <span>{pokemons.length} results</span>
                     <div className={styles.yLine}></div>
                     <span>
