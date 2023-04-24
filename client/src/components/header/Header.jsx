@@ -246,7 +246,6 @@ const Header = (props) => {
                         )}
                         <div className={styles.xLine}></div>
                         <div className={styles.dropdownOptionLast}>
-                            {isLogin && <Link to="/create">Favorites</Link>}
                             {isLogin ? (
                                 <button
                                     id={USER.SIGN_OUT}
