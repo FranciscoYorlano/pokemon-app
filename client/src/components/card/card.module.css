@@ -123,6 +123,10 @@
         color: #fff;
         gap: 0.2rem;
     }
+
+    .notPhones {
+        display: none;
+    }
 }
 
 /* Types backgrounds */
