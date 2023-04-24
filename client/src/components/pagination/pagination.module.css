@@ -1,40 +1,56 @@
-.pagesContainer {
-    justify-self: center;
+.pagesWrapper {
     display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 4rem;
+    color: #fff;
+}
+
+.pagesContainer {
+    display: flex;
+    justify-self: center;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .button {
-    padding: 0.5rem 1.2rem;
-    border-radius: 0.8rem;
-    color: #006571;
+    background: linear-gradient(to bottom right, #8a2be3, #4b0082);
+    color: #ffffff;
     border: none;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 2rem;
     cursor: pointer;
-    background-color: #f9a826;
-    font-family: "Montserrat", sans-serif;
-    transition: background-color 0.1s ease-in-out;
-    font-weight: bold;
+}
+
+.button:hover {
+    background: linear-gradient(to bottom right, #0069d9, #0042a8);
+    color: #fff;
 }
 
 .buttonSelected {
-    padding: 0.5rem 1.2rem;
-    border-radius: 0.8rem;
-    border: none;
-    cursor: not-allowed;
-    font-family: "Montserrat", sans-serif;
-    background: linear-gradient(to bottom right, #8a2be2, #4b0082);
-    opacity: 0.85;
-    transition: background-color 0.1s ease-in-out;
-    box-shadow: none;
-    font-weight: bold;
+    background: linear-gradient(to bottom right, #0069d9, #0042a8);
     color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 2rem;
+    cursor: not-allowed;
 }
 
 .button:disabled {
     background: linear-gradient(to bottom right, #8a2be2, #4b0082);
     opacity: 0.6;
-    transition: background-color 0.1s ease-in-out;
     box-shadow: none;
     font-weight: bold;
     color: #ffffff;

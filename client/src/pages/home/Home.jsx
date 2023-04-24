@@ -74,31 +74,16 @@ const Home = (props) => {
         orderPokemons,
         getAllTypes,
         getUserPokemonByUserId,
-        addPokemonToUserPokemons,
-        deletePokemonFromUserPokemons,
     } = props;
 
+    // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
-    const [filterType, setFilterType] = useState(filtersValues.byType);
-    const [filterSource, setFilterSource] = useState(filtersValues.bySource);
-    const [order, setOrder] = useState(orderValue);
-
-    useEffect(() => {
-        !pokemons.length && getAllPokemons();
-        !types.length && getAllTypes();
-        if (isLogin) {
-            !userPokemons.length && getUserPokemonByUserId(userData.id);
-        }
-    }, []);
-
-    // Paginated
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
     }
-
     const paginatedPokemons = pokemons.slice(
         (currentPage - 1) * pokemonsPerPage,
         currentPage * pokemonsPerPage
@@ -107,15 +92,22 @@ const Home = (props) => {
         setCurrentPage(Number(event.target.id));
     };
 
+    // Redux
+    useEffect(() => {
+        !pokemons.length && getAllPokemons();
+        !types.length && getAllTypes();
+        if (isLogin) {
+            !userPokemons.length && getUserPokemonByUserId(userData.id);
+        }
+    }, []);
+
     // Filters
     const handleFilterByType = (event) => {
-        setFilterType(event.target.value);
         filterPokemonsByType(event.target.value);
         setCurrentPage(1);
     };
 
     const handleFilterBySource = (event) => {
-        setFilterSource(event.target.value);
         filterPokemonsBySource(event.target.value);
         setCurrentPage(1);
     };
@@ -125,9 +117,8 @@ const Home = (props) => {
         setCurrentPage(1);
     };
 
-    // Order
-    const handleOrder = (event) => {
-        setOrder(event.target.value);
+    // Sort
+    const handleOSort = (event) => {
         orderPokemons(event.target.value);
         setCurrentPage(1);
     };
@@ -138,7 +129,10 @@ const Home = (props) => {
             <div className={styles.navBar}>
                 <div className={styles.left}>
                     <span>Filters: </span>
-                    <select value={filterType} onChange={handleFilterByType}>
+                    <select
+                        value={filtersValues.byType}
+                        onChange={handleFilterByType}
+                    >
                         <option value={FILTERS.BY_TYPE.ALL_TYPES}>
                             All types
                         </option>
@@ -151,7 +145,7 @@ const Home = (props) => {
                         ))}
                     </select>
                     <select
-                        value={filterSource}
+                        value={filtersValues.bySource}
                         onChange={handleFilterBySource}
                     >
                         <option value={FILTERS.BY_SOURCE.ALL_SOURCES}>
@@ -160,7 +154,7 @@ const Home = (props) => {
                         <SelectSource pokemons={pokemons} />
                     </select>
                     <span>Sort:</span>
-                    <select value={order} onChange={handleOrder}>
+                    <select value={orderValue} onChange={handleOSort}>
                         <option value={SORTS.DEFAULT}>Default</option>
                         <option value={SORTS.ALPHABETICAL_ASC}>(A-Z)</option>
                         <option value={SORTS.ALPHABETICAL_DESC}>(Z-A)</option>
@@ -202,13 +196,11 @@ const Home = (props) => {
                     <span className={styles.loader}></span>
                 </div>
             )}
-            <div className={styles.navBarMobile}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    handlePageChange={handlePageChange}
-                />
-            </div>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                handlePageChange={handlePageChange}
+            />
         </div>
     );
 };
