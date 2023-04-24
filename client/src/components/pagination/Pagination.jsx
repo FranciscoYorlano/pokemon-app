@@ -1,6 +1,15 @@
+// Styles
 import styles from "./pagination.module.css";
 
-const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
+// Redux
+import { connect } from "react-redux";
+import { setCurrentPage } from "../../redux/actions";
+
+const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+    const handlePageChange = (event) => {
+        setCurrentPage(Number(event.target.id));
+    };
+
     return (
         <div className={styles.pagesWrapper}>
             <div className={styles.pagesContainer}>
@@ -68,4 +77,16 @@ const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
     );
 };
 
-export default Pagination;
+const mapStateToProps = (state) => {
+    return {
+        currentPage: state.currentPage,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setCurrentPage: (page) => dispatch(setCurrentPage(page)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
