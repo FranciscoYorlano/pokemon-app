@@ -8,7 +8,6 @@ import Pagination from "../../components/pagination/Pagination";
 
 // ======================== Hooks
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 // ======================== Redux
 import { connect } from "react-redux";
@@ -23,6 +22,7 @@ import {
     orderPokemons,
     getAllTypes,
     getUserPokemonByUserId,
+    setCurrentPage,
 } from "../../redux/actions";
 
 // ======================== Components
@@ -66,32 +66,35 @@ const Home = (props) => {
         isLogin,
         userData,
         userPokemons,
+        currentPage,
     } = props;
 
     const {
         getAllPokemons,
         filterPokemonsByType,
         filterPokemonsBySource,
+        setCurrentPage,
         orderPokemons,
         getAllTypes,
         getUserPokemonByUserId,
     } = props;
 
-    const isHome = useLocation().pathname === "/home";
-    console.log(isHome);
-
     // Pagination
-    const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
     }
-    const paginatedPokemons = pokemons.slice(
+    const paginatedPokemonsPre = pokemons.slice(
         (currentPage - 1) * pokemonsPerPage,
         currentPage * pokemonsPerPage
     );
+    const paginatedPokemons = paginatedPokemonsPre.map((pokemon) => ({
+        ...pokemon,
+        isFav: userPokemons.map((fav) => fav.PokemonId).includes(pokemon.id),
+    }));
+
     const handlePageChange = (event) => {
         setCurrentPage(Number(event.target.id));
     };
@@ -197,10 +200,7 @@ const Home = (props) => {
                 </div>
             </div>
             {pokemons.length ? (
-                <CardContainer
-                    paginatedPokemons={paginatedPokemons}
-                    userPokemons={userPokemons}
-                />
+                <CardContainer paginatedPokemons={paginatedPokemons} />
             ) : (
                 <div className={styles.loadingContainer}>
                     <span className={styles.loader}></span>
@@ -221,6 +221,7 @@ const mapStateToProps = (state) => {
         types: state.types,
         filtersValues: state.filtersValues,
         orderValue: state.orderValue,
+        currentPage: state.currentPage,
         isLogin: state.isLogin,
         userData: state.userData,
         userPokemons: state.userPokemons,
@@ -237,6 +238,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllTypes: () => dispatch(getAllTypes()),
         getUserPokemonByUserId: (userId) =>
             dispatch(getUserPokemonByUserId(userId)),
+        setCurrentPage: (page) => dispatch(setCurrentPage(page)),
     };
 };
 

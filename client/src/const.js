@@ -21,3 +21,8 @@ export const USER = {
     SIGN_IN: "signIn",
     SIGN_OUT: "signOut",
 };
+
+export const PAGE = {
+    HOME: "home",
+    USER_POKEMONS: "userPokemons",
+};

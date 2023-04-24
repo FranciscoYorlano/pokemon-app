@@ -15,6 +15,7 @@ import Landing from "./pages/landing/Landing";
 import NotFound from "./pages/notFound/NotFound";
 import Signin from "./pages/signin/Signin";
 import Signup from "./pages/signup/Signup";
+import UserPokemons from "./pages/userPokemons/UserPokemons";
 
 // ======================== React Redux
 import { connect } from "react-redux";
@@ -53,7 +54,10 @@ function App(props) {
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 {isLogin && (
-                    <Route path={`/${userData.username}`} element={<Home />} />
+                    <Route
+                        path={`/${userData.username}`}
+                        element={<UserPokemons />}
+                    />
                 )}
                 <Route path="*" element={<NotFound />} />
             </Routes>
