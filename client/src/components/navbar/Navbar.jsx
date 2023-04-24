@@ -139,7 +139,7 @@ const Navbar = (props) => {
                 <span>{pokemons.length} results</span>
                 <div className={styles.yLine}></div>
                 <span>
-                    Page {currentPage}/{totalPages}
+                    Page {currentPage} / {totalPages}
                 </span>
             </div>
         </div>

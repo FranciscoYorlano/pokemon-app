@@ -27,7 +27,7 @@ const Home = (props) => {
     const isHome = useLocation().pathname === "/home";
     useEffect(() => {
         isHome ? removePokemons() : setUserFavorites();
-    }, [isHome, userPokemons]);
+    }, [isHome]);
 
     const { setUserFavorites, removePokemons } = props;
 

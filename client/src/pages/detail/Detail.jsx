@@ -25,11 +25,20 @@ const Detail = () => {
     const pokemon = useSelector((state) => state.pokemonDetail);
 
     return (
-        <div className={styles.detailContainer}>
+        <div className={styles.container}>
+            <div className={styles.imageContainer}>
+                <div className={styles.textContainer}>
+                    {pokemon.name &&
+                        pokemon.name[0].toUpperCase() +
+                            pokemon.name.substring(1)}{" "}
+                    Detail
+                </div>
+            </div>
             {pokemon.image ? (
-                <>
+                <div className={styles.detailContainer}>
                     <div className={styles.leftContainer}>
                         <h1 className={styles.title}>
+                            Name:{" "}
                             {pokemon.name[0].toUpperCase() +
                                 pokemon.name.substring(1)}
                         </h1>
@@ -127,25 +136,25 @@ const Detail = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className={styles.progressValueBlack}>
+                                    <div className={styles.progressValue}>
                                         UNKNOWN
                                     </div>
                                 )}
                             </div>
                         </div>
-                        <div className={styles.rowStats}>
-                            <div className={styles.colStats}>
+                        <div className={styles.bodyStats}>
+                            <span className={styles.bodyStat}>
                                 Height:{" "}
                                 {pokemon.height
                                     ? `${pokemon.height / 10} m`
                                     : "UNKNOWN"}
-                            </div>
-                            <div className={styles.colStats}>
+                            </span>
+                            <span className={styles.bodyStat}>
                                 Weight:{" "}
                                 {pokemon.weight
                                     ? `${pokemon.weight / 10}Kg`
                                     : "UNKNOWN"}
-                            </div>
+                            </span>
                         </div>
                     </div>
                     <div className={styles.rightContainer}>
@@ -163,13 +172,8 @@ const Detail = () => {
                                 </span>
                             ))}
                         </div>
-                        <p className={styles.typesLabel}>
-                            {pokemon.name[0].toUpperCase() +
-                                pokemon.name.substring(1)}{" "}
-                            types
-                        </p>
                     </div>
-                </>
+                </div>
             ) : (
                 <div className={styles.loadingContainer}>
                     <span class={styles.loader}></span>
