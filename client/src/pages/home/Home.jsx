@@ -15,20 +15,21 @@ import { connect } from "react-redux";
 import {
     getAllPokemons,
     getUserPokemonByUserId,
-    setCurrentPage,
+    setUserFavorites,
+    removePokemons,
 } from "../../redux/actions";
+import { useLocation } from "react-router-dom";
 
 const Home = (props) => {
-    const {
-        pokemons,
-        isLogin,
-        userData,
-        userPokemons,
-        currentPage,
-        pokemonsPerPage,
-    } = props;
+    const { pokemons, userPokemons, currentPage, pokemonsPerPage } = props;
 
-    const { getAllPokemons, getUserPokemonByUserId } = props;
+    // Redux
+    const isHome = useLocation().pathname === "/home";
+    useEffect(() => {
+        isHome ? removePokemons() : setUserFavorites();
+    }, [isHome, userPokemons]);
+
+    const { setUserFavorites, removePokemons } = props;
 
     // Pagination
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
@@ -40,26 +41,21 @@ const Home = (props) => {
         (currentPage - 1) * pokemonsPerPage,
         currentPage * pokemonsPerPage
     );
+
     const paginatedPokemons = paginatedPokemonsPre.map((pokemon) => ({
         ...pokemon,
-        isFav: userPokemons.map((fav) => fav.PokemonId).includes(pokemon.id),
+        isFav: userPokemons.map((p) => p.id).includes(pokemon.id),
     }));
-
-    // Redux
-    useEffect(() => {
-        !pokemons.length && getAllPokemons();
-        if (isLogin) {
-            !userPokemons.length && getUserPokemonByUserId(userData.id);
-        }
-    }, []);
 
     return (
         <div className={styles.homeContainer}>
             <div className={styles.homeImage}>
                 <div className={styles.textContainer}>
-                    <button className={styles.buttonPrimary}>
-                        franyorlano's collection
-                    </button>
+                    {!isHome && (
+                        <button className={styles.buttonPrimary}>
+                            franyorlano's collection
+                        </button>
+                    )}
                 </div>
             </div>
             <Navbar totalPages={totalPages} />
@@ -92,6 +88,8 @@ const mapDispatchToProps = (dispatch) => {
         getAllPokemons: () => dispatch(getAllPokemons()),
         getUserPokemonByUserId: (userId) =>
             dispatch(getUserPokemonByUserId(userId)),
+        setUserFavorites: () => dispatch(setUserFavorites()),
+        removePokemons: () => dispatch(removePokemons()),
     };
 };
 

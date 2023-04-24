@@ -88,7 +88,17 @@ const addNewUserPokemonController = async (data) => {
             UserId: userId,
         });
 
-        return newUserPokemon;
+        const lastUserPokemon = await UsersPokemons.findOne({
+            where: { UserId: userId, PokemonId: pokemonId },
+            include: [
+                {
+                    model: Pokemon,
+                    include: Type,
+                },
+            ],
+        });
+
+        return minifiedPokemonTemplateCreator(lastUserPokemon);
     } else {
         throw new Error("Api pokemons can't be added to user collection.");
     }

@@ -15,15 +15,27 @@ import Landing from "./pages/landing/Landing";
 import NotFound from "./pages/notFound/NotFound";
 import Signin from "./pages/signin/Signin";
 import Signup from "./pages/signup/Signup";
-import UserPokemons from "./pages/userPokemons/UserPokemons";
+
+// ======================== Hooks
+import { useEffect } from "react";
 
 // ======================== React Redux
 import { connect } from "react-redux";
+import { getAllPokemons, getUserPokemonByUserId } from "../src/redux/actions";
 
 function App(props) {
-    const { globalError, globalSuccess, isLogin, userData } = props;
-    const location = useLocation().pathname;
+    const {
+        globalError,
+        globalSuccess,
+        isLogin,
+        userData,
+        pokemons,
+        userPokemons,
+    } = props;
 
+    const { getAllPokemons, getUserPokemonByUserId } = props;
+
+    const location = useLocation().pathname;
     const locationAlerts = Boolean(
         location === "/home" ||
             location === "/detail/:id" ||
@@ -41,6 +53,14 @@ function App(props) {
         globalSuccess && !globalError && locationAlerts
     );
 
+    // Redux
+    useEffect(() => {
+        !pokemons.length && getAllPokemons();
+        if (isLogin) {
+            !userPokemons.length && getUserPokemonByUserId(userData.id);
+        }
+    }, [isLogin, userPokemons]);
+
     return (
         <>
             {locationHeader && <Header />}
@@ -54,10 +74,7 @@ function App(props) {
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 {isLogin && (
-                    <Route
-                        path={`/${userData.username}`}
-                        element={<UserPokemons />}
-                    />
+                    <Route path={`/${userData.username}`} element={<Home />} />
                 )}
                 <Route path="*" element={<NotFound />} />
             </Routes>
@@ -67,11 +84,21 @@ function App(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        pokemons: state.pokemons,
         globalError: state.globalError,
         globalSuccess: state.globalSuccess,
         isLogin: state.isLogin,
         userData: state.userData,
+        userPokemons: state.userPokemons,
     };
 };
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAllPokemons: () => dispatch(getAllPokemons()),
+        getUserPokemonByUserId: (userId) =>
+            dispatch(getUserPokemonByUserId(userId)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

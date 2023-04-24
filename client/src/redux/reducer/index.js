@@ -27,6 +27,7 @@ import {
     USER_POKEMONS_DELETE,
     SET_CURRENT_PAGE,
     SET_POKEMONS_PER_PAGE,
+    USER_FAVORITES_SET,
 } from "../actions";
 
 // ======================== Consts
@@ -192,10 +193,14 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, pokemons: state.allPokemons };
         case POKEMONS_BY_NAME_GET:
             return { ...state, pokemons: action.payload };
+        case USER_FAVORITES_SET:
+            return {
+                ...state,
+                pokemons: state.userPokemons,
+            };
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: action.payload };
         case SET_POKEMONS_PER_PAGE:
-            console.log(action.payload);
             return {
                 ...state,
                 pokemonsPerPage: action.payload,
@@ -273,7 +278,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userPokemons: state.userPokemons.filter(
-                    (uP) => uP.PokemonId !== action.payload
+                    (pokemon) => pokemon.id !== action.payload
                 ),
             };
 
