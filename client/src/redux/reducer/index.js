@@ -25,6 +25,11 @@ import {
     USER_POKEMONS_DELETE,
 } from "../actions";
 
+// ======================== Consts
+import { FILTERS, SORTS } from "../../const";
+
+const { BY_TYPE, BY_SOURCE } = FILTERS;
+
 // ======================== Initial State
 
 const initialState = {
@@ -49,18 +54,18 @@ const initialState = {
 const applyFilters = (allPokemons, byType, bySource) => {
     let filteredPokemons = [...allPokemons];
 
-    if (byType !== "allTypes") {
+    if (byType !== BY_TYPE.ALL_TYPES) {
         filteredPokemons = filteredPokemons.filter((p) =>
             p.types.includes(byType)
         );
     }
 
-    if (bySource !== "allSources") {
+    if (bySource !== BY_SOURCE.ALL_SOURCES) {
         filteredPokemons = filteredPokemons.filter((p) => {
-            if (bySource === "dataBase") {
+            if (bySource === BY_SOURCE.DATABASE) {
                 return isNaN(p.id) === true;
             }
-            if (bySource === "pokeApi") {
+            if (bySource === BY_SOURCE.POKEAPI) {
                 return isNaN(p.id) === false;
             }
             return true;
@@ -130,26 +135,26 @@ const rootReducer = (state = initialState, action) => {
             let orderedPokemons = [...state.pokemons];
 
             switch (action.payload) {
-                case "default":
+                case SORTS.DEFAULT:
                     return {
                         ...state,
                         pokemons: state.allPokemons,
                         orderValue: action.payload,
                     };
-                case "alphabeticalAsc":
+                case SORTS.ALPHABETICAL_ASC:
                     orderedPokemons.sort((a, b) =>
                         a.name.localeCompare(b.name)
                     );
                     break;
-                case "alphabeticalDesc":
+                case SORTS.ALPHABETICAL_DESC:
                     orderedPokemons.sort((a, b) =>
                         b.name.localeCompare(a.name)
                     );
                     break;
-                case "attackAsc":
+                case SORTS.ATTACK_ASC:
                     orderedPokemons.sort((a, b) => a.attack - b.attack);
                     break;
-                case "attackDesc":
+                case SORTS.ATTACK_DESC:
                     orderedPokemons.sort((a, b) => b.attack - a.attack);
                     break;
                 default:
