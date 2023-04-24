@@ -1,5 +1,17 @@
 // Models
-const { UsersPokemons, User, Pokemon } = require("../db");
+const { UsersPokemons, User, Pokemon, Type } = require("../db");
+
+// ======================== Templates creators
+const minifiedPokemonTemplateCreator = (pokemon) => {
+    return {
+        id: pokemon.PokemonId,
+        name: pokemon.Pokemon.name,
+        image: pokemon.Pokemon.image,
+        attack: pokemon.Pokemon.attack,
+        life: pokemon.Pokemon.life,
+        types: pokemon.Pokemon.Types.map((t) => t.name),
+    };
+};
 
 // ======================== Regex
 const REGEX_UUID =
@@ -16,12 +28,19 @@ const getUserPokemonsByUserIdController = async (id) => {
         throw new Error("User not exist.");
     }
 
-    const userPokemons = UsersPokemons.findAll({
+    const userPokemons = await UsersPokemons.findAll({
         where: { UserId: id },
-        include: Pokemon,
+        include: [
+            {
+                model: Pokemon,
+                include: Type,
+            },
+        ],
     });
 
-    return userPokemons;
+    const result = userPokemons.map((p) => minifiedPokemonTemplateCreator(p));
+
+    return result;
 };
 
 const addNewUserPokemonController = async (data) => {
