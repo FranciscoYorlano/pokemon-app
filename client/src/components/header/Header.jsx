@@ -17,6 +17,9 @@ import {
     signout,
 } from "../../redux/actions";
 
+// ======================== Consts
+import { USER } from "../../const";
+
 const Header = (props) => {
     const { getPokemonsByName, removePokemons, isLogin, userData, signout } =
         props;
@@ -43,9 +46,9 @@ const Header = (props) => {
     };
 
     const handleButtonClick = (event) => {
-        if (event.target.id === "signIn") navigate("/signin");
+        if (event.target.id === USER.SIGN_IN) navigate("/signin");
 
-        if (event.target.id === "signOut") signout();
+        if (event.target.id === USER.SIGN_OUT) signout();
     };
 
     return (
@@ -77,10 +80,10 @@ const Header = (props) => {
                 <Link to="/home">Home</Link>
                 <Link to="/create">Create</Link>
                 <div className={styles.yLine}></div>
-                {isLogin && <Link to="/create">Favorites</Link>}
+                {isLogin && <Link to={`/${userData.username}`}>Favorites</Link>}
                 {isLogin ? (
                     <button
-                        id="signOut"
+                        id={USER.SIGN_OUT}
                         className={styles.buttonDanger}
                         onClick={handleButtonClick}
                     >
@@ -88,7 +91,7 @@ const Header = (props) => {
                     </button>
                 ) : (
                     <button
-                        id="signIn"
+                        id={USER.SIGN_IN}
                         className={styles.buttonPrimary}
                         onClick={handleButtonClick}
                     >
@@ -96,7 +99,10 @@ const Header = (props) => {
                     </button>
                 )}
                 <div className={styles.yLine}></div>
-                <Link to="">
+                <Link
+                    to="https://www.linkedin.com/in/francisco-yorlano/"
+                    target="_blank"
+                >
                     <svg
                         width="2.5rem"
                         height="2.5rem"
@@ -125,7 +131,10 @@ const Header = (props) => {
                         </g>
                     </svg>
                 </Link>
-                <Link to="">
+                <Link
+                    to="https://github.com/FranciscoYorlano/PI-Pokemon-v2.0"
+                    target="_blank"
+                >
                     <svg
                         width="2rem"
                         height="2rem"
@@ -226,7 +235,10 @@ const Header = (props) => {
                             <>
                                 <div className={styles.xLine}></div>
                                 <div className={styles.dropdownOption}>
-                                    <Link className={styles.link} to="/create">
+                                    <Link
+                                        className={styles.link}
+                                        to={`/${userData.username}`}
+                                    >
                                         Favorites
                                     </Link>
                                 </div>
@@ -237,7 +249,7 @@ const Header = (props) => {
                             {isLogin && <Link to="/create">Favorites</Link>}
                             {isLogin ? (
                                 <button
-                                    id="SignOut"
+                                    id={USER.SIGN_OUT}
                                     className={styles.buttonDanger}
                                     onClick={handleButtonClick}
                                 >
@@ -245,7 +257,7 @@ const Header = (props) => {
                                 </button>
                             ) : (
                                 <button
-                                    id="SignIn"
+                                    id={USER.SIGN_IN}
                                     className={styles.buttonPrimary}
                                     onClick={handleButtonClick}
                                 >

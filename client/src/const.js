@@ -16,3 +16,8 @@ export const SORTS = {
     ATTACK_ASC: "attackAsc",
     ATTACK_DESC: "attackDesc",
 };
+
+export const USER = {
+    SIGN_IN: "signIn",
+    SIGN_OUT: "signOut",
+};
