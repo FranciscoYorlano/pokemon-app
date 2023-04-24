@@ -29,6 +29,7 @@ const getUserByCredentialsController = async (userData) => {
     // Search user
     const user = await User.findOne({
         where: { email: email, password: password },
+        attributes: ["username", "id"],
     });
 
     if (user === null) {
