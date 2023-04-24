@@ -19,7 +19,7 @@ const getUserPokemonsByUserId = async (req, res) => {
 };
 
 const addNewUserPokemon = async (req, res) => {
-    const data = req.body;
+    const { data } = req.body;
     console.log(data);
     try {
         const status = await addNewUserPokemonController(data);

@@ -268,6 +268,7 @@ export const removeUserPokemons = () => {
 };
 
 export const addPokemonToUserPokemons = (data) => {
+    console.log(data);
     return async (dispatch) => {
         try {
             const response = await axios.post(
@@ -291,8 +292,7 @@ export const deletePokemonFromUserPokemons = (data) => {
     return async (dispatch) => {
         try {
             const response = await axios.delete(
-                `${BACKEND_BASE_URI}/userspokemons`,
-                data
+                `${BACKEND_BASE_URI}/userspokemons?userId=${data.userId}&pokemonId=${data.pokemonId}`
             );
             dispatch({
                 type: USER_POKEMONS_DELETE,

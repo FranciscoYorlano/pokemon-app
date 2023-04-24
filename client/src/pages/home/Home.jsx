@@ -18,6 +18,7 @@ import {
     filterPokemonsBySource,
     orderPokemons,
     getAllTypes,
+    getUserPokemonByUserId,
 } from "../../redux/actions";
 
 // ======================== Components
@@ -57,7 +58,15 @@ const SelectSource = ({ pokemons }) => {
 };
 
 const Home = (props) => {
-    const { pokemons, types, filtersValues, orderValue } = props;
+    const {
+        pokemons,
+        types,
+        filtersValues,
+        orderValue,
+        isLogin,
+        userData,
+        userPokemons,
+    } = props;
 
     const {
         getAllPokemons,
@@ -65,6 +74,9 @@ const Home = (props) => {
         filterPokemonsBySource,
         orderPokemons,
         getAllTypes,
+        getUserPokemonByUserId,
+        addPokemonToUserPokemons,
+        deletePokemonFromUserPokemons,
     } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -76,6 +88,9 @@ const Home = (props) => {
     useEffect(() => {
         !pokemons.length && getAllPokemons();
         !types.length && getAllTypes();
+        if (isLogin) {
+            !userPokemons.length && getUserPokemonByUserId(userData.id);
+        }
     }, []);
 
     // Paginated
@@ -174,7 +189,10 @@ const Home = (props) => {
                 </div>
             </div>
             {pokemons.length ? (
-                <CardContainer paginatedPokemons={paginatedPokemons} />
+                <CardContainer
+                    paginatedPokemons={paginatedPokemons}
+                    userPokemons={userPokemons}
+                />
             ) : (
                 <div className={styles.loadingContainer}>
                     <span className={styles.loader}></span>
@@ -197,6 +215,9 @@ const mapStateToProps = (state) => {
         types: state.types,
         filtersValues: state.filtersValues,
         orderValue: state.orderValue,
+        isLogin: state.isLogin,
+        userData: state.userData,
+        userPokemons: state.userPokemons,
     };
 };
 
@@ -208,6 +229,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(filterPokemonsBySource(source)),
         orderPokemons: (order) => dispatch(orderPokemons(order)),
         getAllTypes: () => dispatch(getAllTypes()),
+        getUserPokemonByUserId: (userId) =>
+            dispatch(getUserPokemonByUserId(userId)),
     };
 };
 

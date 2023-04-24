@@ -4,6 +4,7 @@
     align-items: center;
     padding: 1rem 0 0 0;
     margin-right: 0;
+    z-index: -1;
 }
 
 .alertContainer {

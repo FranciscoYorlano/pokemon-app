@@ -28,7 +28,7 @@ import {
 // ======================== Initial State
 
 const initialState = {
-    globalError: "",
+    globalError: "Error grave atender ya ya ya ya ya ya ay ",
     globalSuccess: "",
     allPokemons: [],
     pokemons: [],
@@ -236,8 +236,8 @@ const rootReducer = (state = initialState, action) => {
         case USER_POKEMONS_DELETE:
             return {
                 ...state,
-                userPokemons: userPokemons.filter(
-                    (uP) => uP.pokemonId === action.payload
+                userPokemons: state.userPokemons.filter(
+                    (uP) => uP.pokemonId !== action.payload
                 ),
             };
 

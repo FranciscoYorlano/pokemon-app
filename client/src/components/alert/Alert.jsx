@@ -8,6 +8,7 @@ import { removeGlobalError } from "../../redux/actions";
 const Alert = (props) => {
     const { globalError, removeGlobalError } = props;
 
+    
     const handleCloseAlert = () => {
         removeGlobalError();
     };

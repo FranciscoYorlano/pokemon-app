@@ -110,8 +110,8 @@ const Header = (props) => {
 
                         <g
                             id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            srokeLinecap="round"
+                            SrokeLinejoin="round"
                             stroke="#CCCCCC"
                             stroke-width="0.144"
                         />
@@ -138,8 +138,8 @@ const Header = (props) => {
 
                         <g
                             id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            srokeLinecap="round"
+                            SrokeLinejoin="round"
                         />
 
                         <g id="SVGRepo_iconCarrier">
@@ -149,7 +149,7 @@ const Header = (props) => {
                                 stroke="none"
                                 stroke-width="1"
                                 fill="none"
-                                fill-rule="evenodd"
+                                fllRule="evenodd"
                             >
                                 {" "}
                                 <g
@@ -178,10 +178,10 @@ const Header = (props) => {
                 </Link>
             </div>
             <div className={styles.responsiveMenu}>
-                <div class={styles.dropdown}>
+                <div className={styles.dropdown}>
                     <button
                         onClick={handleShowDropdown}
-                        class={styles.dropdownBtn}
+                        className={styles.dropdownBtn}
                     >
                         .
                         <svg
@@ -196,8 +196,8 @@ const Header = (props) => {
 
                             <g
                                 id="SVGRepo_tracerCarrier"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                srokeLinecap="round"
+                                SrokeLinejoin="round"
                             />
 
                             <g id="SVGRepo_iconCarrier">
@@ -207,7 +207,7 @@ const Header = (props) => {
                         </svg>
                     </button>
                     <div
-                        class={`${styles.dropdownContent} ${
+                        className={`${styles.dropdownContent} ${
                             showDropdown && styles.show
                         }`}
                     >
