@@ -5,6 +5,8 @@ import {
     GLOBAL_SUCCESS_SET,
     GLOBAL_SUCCESS_REMOVE,
     ALL_POKEMONS_GET,
+    SEARCH_VALUE_SET,
+    SEARCH_VALUE_REMOVE,
     POKEMONS_FILTER_BY_TYPE,
     POKEMONS_FILTER_BY_SOURCE,
     POKEMONS_ORDER,
@@ -37,6 +39,7 @@ const initialState = {
     globalSuccess: "",
     allPokemons: [],
     pokemons: [],
+    searchValue: "",
     filtersValues: {
         byType: "allTypes",
         bySource: "allSources",
@@ -97,6 +100,19 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: action.payload,
                 pokemons: action.payload,
+            };
+
+        // Search value
+        case SEARCH_VALUE_SET:
+            return {
+                ...state,
+                searchValue: action.payload,
+            };
+
+        case SEARCH_VALUE_REMOVE:
+            return {
+                ...state,
+                searchValue: "",
             };
 
         // Pokemons

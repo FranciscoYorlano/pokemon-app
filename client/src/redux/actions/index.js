@@ -14,6 +14,10 @@ export const GLOBAL_SUCCESS_REMOVE = "GLOBAL_SUCCESS_REMOVE";
 // All Pokemons
 export const ALL_POKEMONS_GET = "GET_ALL_POKEMONS";
 
+// Search value
+export const SEARCH_VALUE_SET = "SEARCH_VALUE_SET";
+export const SEARCH_VALUE_REMOVE = "SEARCH_VALUE_REMOVE";
+
 // Pokemons
 export const POKEMONS_FILTER_BY_TYPE = "POKEMONS_FILTER_BY_TYPE";
 export const POKEMONS_FILTER_BY_SOURCE = "POKEMONS_FILTER_BY_SOURCE";
@@ -83,6 +87,19 @@ export const getAllPokemons = () => {
                 payload: error.response.data.error,
             });
         }
+    };
+};
+
+export const setSearchValue = (value) => {
+    return {
+        type: SEARCH_VALUE_SET,
+        payload: value,
+    };
+};
+
+export const removeSearchValue = () => {
+    return {
+        type: SEARCH_VALUE_REMOVE,
     };
 };
 
