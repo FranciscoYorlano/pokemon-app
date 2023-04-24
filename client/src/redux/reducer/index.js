@@ -26,7 +26,7 @@ import {
     USER_POKEMONS_ADD,
     USER_POKEMONS_DELETE,
     SET_CURRENT_PAGE,
-    SET_CURRENT_PAGE_USER_PAGE,
+    SET_POKEMONS_PER_PAGE,
 } from "../actions";
 
 // ======================== Consts
@@ -42,18 +42,15 @@ const initialState = {
     allPokemons: [],
     pokemons: [],
     searchValue: "",
+
     filtersValues: {
         byType: BY_TYPE.ALL_TYPES,
         bySource: BY_SOURCE.ALL_SOURCES,
     },
-    currentPage: 1,
     orderValue: SORTS.DEFAULT,
-    filtersValuesUserPage: {
-        byType: BY_TYPE.ALL_TYPES,
-        bySource: BY_SOURCE.ALL_SOURCES,
-    },
-    currentPageUserPage: 1,
-    orderValueUserPage: SORTS.DEFAULT,
+    currentPage: 1,
+    pokemonsPerPage: 12,
+
     pokemonDetail: {},
     types: [],
     signInError: "",
@@ -90,6 +87,7 @@ const applyFilters = (allPokemons, byType, bySource) => {
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
         // Global Error
         case GLOBAL_ERROR_SET:
@@ -196,8 +194,12 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, pokemons: action.payload };
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: action.payload };
-        case SET_CURRENT_PAGE_USER_PAGE:
-            return { ...state, currentPageUserPage: action.payload };
+        case SET_POKEMONS_PER_PAGE:
+            console.log(action.payload);
+            return {
+                ...state,
+                pokemonsPerPage: action.payload,
+            };
 
         // Pokemon Detail
         case POKEMON_DETAIL_GET:

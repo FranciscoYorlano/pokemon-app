@@ -22,10 +22,14 @@ export const SEARCH_VALUE_REMOVE = "SEARCH_VALUE_REMOVE";
 export const POKEMONS_FILTER_BY_TYPE = "POKEMONS_FILTER_BY_TYPE";
 export const POKEMONS_FILTER_BY_SOURCE = "POKEMONS_FILTER_BY_SOURCE";
 export const POKEMONS_ORDER = "POKEMONS_ORDER";
-export const POKEMONS_REMOVE = "POKEMONS_REMOVE";
+
 export const POKEMONS_BY_NAME_GET = "POKEMONS_GET_BY_NAME";
+export const POKEMONS_REMOVE = "POKEMONS_REMOVE";
+
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_CURRENT_PAGE_USER_PAGE = "SET_CURRENT_PAGE_USER_PAGE";
+
+export const SET_POKEMONS_PER_PAGE = "SET_POKEMONS_PER_PAGE";
 
 // Pokemon Detail
 export const POKEMON_DETAIL_GET = "POKEMON_DETAIL_GET";
@@ -160,6 +164,14 @@ export const setCurrentPageUserPage = (page) => {
     return {
         type: SET_CURRENT_PAGE_USER_PAGE,
         payload: page,
+    };
+};
+
+export const setPokemonsPerPage = (pokemonsPerPage) => {
+    console.log(pokemonsPerPage);
+    return {
+        type: SET_POKEMONS_PER_PAGE,
+        payload: pokemonsPerPage,
     };
 };
 
