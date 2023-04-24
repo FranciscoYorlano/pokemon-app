@@ -3,12 +3,13 @@ export const FILTERS = {
         ALL_TYPES: "allTypes",
     },
     BY_SOURCE: {
+        ALL_SOURCES: "allSources",
         DATABASE: "database",
         POKEAPI: "pokeapi",
     },
 };
 
-export const SORT = {
+export const SORTS = {
     DEFAULT: "default",
     ALPHABETICAL_ASC: "alphabeticalAsc",
     ALPHABETICAL_DESC: "alphabeticalDesc",

@@ -12,6 +12,9 @@ import { useState, useEffect } from "react";
 // ======================== Redux
 import { connect } from "react-redux";
 
+// ======================== Consts
+import { FILTERS, SORTS } from "../../const";
+
 import {
     getAllPokemons,
     filterPokemonsByType,
@@ -43,14 +46,10 @@ const SelectSource = ({ pokemons }) => {
     ).length;
     return (
         <>
-            <option key="0" value="dataBase">
+            <option value={FILTERS.BY_SOURCE.DATABASE}>
                 Created ({dataBasePokemons})
             </option>
-            <option
-                key="1"
-                value="pokeApi"
-                disabled={!Boolean(pokeApiPokemons)}
-            >
+            <option value={FILTERS.BY_SOURCE.POKEAPI}>
                 Originals ({pokeApiPokemons})
             </option>
         </>
@@ -140,7 +139,9 @@ const Home = (props) => {
                 <div className={styles.left}>
                     <span>Filters: </span>
                     <select value={filterType} onChange={handleFilterByType}>
-                        <option value="allTypes">All types</option>
+                        <option value={FILTERS.BY_TYPE.ALL_TYPES}>
+                            All types
+                        </option>
                         {types.map((type) => (
                             <SelectType
                                 key={type.id}
@@ -153,20 +154,26 @@ const Home = (props) => {
                         value={filterSource}
                         onChange={handleFilterBySource}
                     >
-                        <option value="allSources">All sources</option>
+                        <option value={FILTERS.BY_SOURCE.ALL_SOURCES}>
+                            All sources
+                        </option>
                         <SelectSource pokemons={pokemons} />
                     </select>
                     <span>Sort:</span>
                     <select value={order} onChange={handleOrder}>
-                        <option value="defaul">Default</option>
-                        <option value="alphabeticalAsc">
+                        <option value={SORTS.DEFAULT}>Default</option>
+                        <option value={SORTS.ALPHABETICAL_ASC}>
                             Alphabetical (A-Z)
                         </option>
-                        <option value="alphabeticalDesc">
+                        <option value={SORTS.ALPHABETICAL_DESC}>
                             Alphabetical (Z-A)
                         </option>
-                        <option value="attackAsc">Attack (low to high)</option>
-                        <option value="attackDesc">Attack (high to low)</option>
+                        <option value={SORTS.ATTACK_ASC}>
+                            Attack (low to high)
+                        </option>
+                        <option value={SORTS.ATTACK_DESC}>
+                            Attack (high to low)
+                        </option>
                     </select>
                     <span>Show:</span>
                     <select
@@ -181,6 +188,8 @@ const Home = (props) => {
                     </select>
                 </div>
                 <div className={styles.right}>
+                    <span>{filtersValues.byType !== ""}</span>
+                    <div className={styles.yLine}></div>
                     <span>{pokemons.length} results</span>
                     <div className={styles.yLine}></div>
                     <span>
