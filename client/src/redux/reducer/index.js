@@ -25,6 +25,8 @@ import {
     USER_POKEMONS_REMOVE,
     USER_POKEMONS_ADD,
     USER_POKEMONS_DELETE,
+    SET_CURRENT_PAGE,
+    SET_CURRENT_PAGE_USER_PAGE,
 } from "../actions";
 
 // ======================== Consts
@@ -41,10 +43,17 @@ const initialState = {
     pokemons: [],
     searchValue: "",
     filtersValues: {
-        byType: "allTypes",
-        bySource: "allSources",
+        byType: BY_TYPE.ALL_TYPES,
+        bySource: BY_SOURCE.ALL_SOURCES,
     },
-    orderValue: "defaul",
+    currentPage: 1,
+    orderValue: SORTS.DEFAULT,
+    filtersValuesUserPage: {
+        byType: BY_TYPE.ALL_TYPES,
+        bySource: BY_SOURCE.ALL_SOURCES,
+    },
+    currentPageUserPage: 1,
+    orderValueUserPage: SORTS.DEFAULT,
     pokemonDetail: {},
     types: [],
     signInError: "",
@@ -185,6 +194,10 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, pokemons: state.allPokemons };
         case POKEMONS_BY_NAME_GET:
             return { ...state, pokemons: action.payload };
+        case SET_CURRENT_PAGE:
+            return { ...state, currentPage: action.payload };
+        case SET_CURRENT_PAGE_USER_PAGE:
+            return { ...state, currentPageUserPage: action.payload };
 
         // Pokemon Detail
         case POKEMON_DETAIL_GET:

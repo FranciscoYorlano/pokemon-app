@@ -24,6 +24,8 @@ export const POKEMONS_FILTER_BY_SOURCE = "POKEMONS_FILTER_BY_SOURCE";
 export const POKEMONS_ORDER = "POKEMONS_ORDER";
 export const POKEMONS_REMOVE = "POKEMONS_REMOVE";
 export const POKEMONS_BY_NAME_GET = "POKEMONS_GET_BY_NAME";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_CURRENT_PAGE_USER_PAGE = "SET_CURRENT_PAGE_USER_PAGE";
 
 // Pokemon Detail
 export const POKEMON_DETAIL_GET = "POKEMON_DETAIL_GET";
@@ -103,23 +105,6 @@ export const removeSearchValue = () => {
     };
 };
 
-export const getPokemonsByName = (name) => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(
-                `${BACKEND_BASE_URI}/pokemons?name=${name}`
-            );
-            const pokemons = response.data;
-            dispatch({ type: POKEMONS_BY_NAME_GET, payload: pokemons });
-        } catch (error) {
-            dispatch({
-                type: GLOBAL_ERROR_SET,
-                payload: error.response.data.error,
-            });
-        }
-    };
-};
-
 export const filterPokemonsByType = (type) => {
     return {
         type: POKEMONS_FILTER_BY_TYPE,
@@ -144,6 +129,37 @@ export const orderPokemons = (order) => {
 export const removePokemons = () => {
     return {
         type: POKEMONS_REMOVE,
+    };
+};
+
+export const getPokemonsByName = (name) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(
+                `${BACKEND_BASE_URI}/pokemons?name=${name}`
+            );
+            const pokemons = response.data;
+            dispatch({ type: POKEMONS_BY_NAME_GET, payload: pokemons });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+export const setCurrentPage = (page) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: page,
+    };
+};
+
+export const setCurrentPageUserPage = (page) => {
+    return {
+        type: SET_CURRENT_PAGE_USER_PAGE,
+        payload: page,
     };
 };
 
