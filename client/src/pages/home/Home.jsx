@@ -8,6 +8,7 @@ import Pagination from "../../components/pagination/Pagination";
 
 // ======================== Hooks
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // ======================== Redux
 import { connect } from "react-redux";
@@ -76,6 +77,9 @@ const Home = (props) => {
         getUserPokemonByUserId,
     } = props;
 
+    const isHome = useLocation().pathname === "/home";
+    console.log(isHome);
+
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
@@ -125,7 +129,13 @@ const Home = (props) => {
 
     return (
         <div className={styles.homeContainer}>
-            <div className={styles.homeImage}></div>
+            <div className={styles.homeImage}>
+                <div className={styles.textContainer}>
+                    <button className={styles.buttonPrimary}>
+                        franyorlano's collection
+                    </button>
+                </div>
+            </div>
             <div className={styles.navBar}>
                 <div className={styles.left}>
                     <span>Filters: </span>

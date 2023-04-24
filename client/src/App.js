@@ -20,7 +20,7 @@ import Signup from "./pages/signup/Signup";
 import { connect } from "react-redux";
 
 function App(props) {
-    const { globalError, globalSuccess, isLogin } = props;
+    const { globalError, globalSuccess, isLogin, userData } = props;
     const location = useLocation().pathname;
 
     const locationAlerts = Boolean(
@@ -52,6 +52,9 @@ function App(props) {
                 <Route path="/create" element={<Create />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
+                {isLogin && (
+                    <Route path={`/${userData.username}`} element={<Home />} />
+                )}
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
@@ -63,6 +66,7 @@ const mapStateToProps = (state) => {
         globalError: state.globalError,
         globalSuccess: state.globalSuccess,
         isLogin: state.isLogin,
+        userData: state.userData,
     };
 };
 
