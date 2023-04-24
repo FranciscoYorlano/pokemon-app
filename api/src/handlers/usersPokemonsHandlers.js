@@ -31,9 +31,11 @@ const addNewUserPokemon = async (req, res) => {
 
 const deleteUserPokemon = async (req, res) => {
     const { pokemonId, userId } = req.query;
-    const data = { pokemonId: pokemonId, userId: userId };
     try {
-        const status = await deleteUserPokemonController(data);
+        const status = await deleteUserPokemonController({
+            pokemonId: pokemonId,
+            userId: userId,
+        });
         res.status(200).json(status);
     } catch (error) {
         res.status(400).json({ error: error.message });
