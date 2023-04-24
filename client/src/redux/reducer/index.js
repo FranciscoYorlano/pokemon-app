@@ -28,7 +28,7 @@ import {
 // ======================== Initial State
 
 const initialState = {
-    globalError: "Error grave atender ya ya ya ya ya ya ay ",
+    globalError: "",
     globalSuccess: "",
     allPokemons: [],
     pokemons: [],
@@ -73,6 +73,7 @@ const applyFilters = (allPokemons, byType, bySource) => {
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
+    console.log(state);
     switch (action.type) {
         // Global Error
         case GLOBAL_ERROR_SET:
@@ -237,7 +238,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userPokemons: state.userPokemons.filter(
-                    (uP) => uP.pokemonId !== action.payload
+                    (uP) => uP.PokemonId !== action.payload
                 ),
             };
 

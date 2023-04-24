@@ -34,6 +34,10 @@ const Signin = (props) => {
         password: false,
     });
 
+    useEffect(() => {
+        return setUserData({ email: "", password: "" });
+    }, []);
+
     // Handlers
     const handleEmailChange = (event) => {
         signInError && removeUserError();
@@ -60,7 +64,7 @@ const Signin = (props) => {
     const submitHandler = async (event) => {
         event.preventDefault();
         validateUser(userData);
-        setUserData({ email: "", password: "" });
+        setUserData({ ...userData, password: "" });
     };
 
     return (
