@@ -20,7 +20,7 @@ const apiPokemonTemplateCreator = (pokemon) => {
     return {
         id: pokemon.id,
         name: pokemon.name,
-        image: pokemon.sprites.front_default,
+        image: pokemon.sprites.other.home.front_default,
         life: pokemon.stats[0].base_stat,
         attack: pokemon.stats[1].base_stat,
         defense: pokemon.stats[2].base_stat,
