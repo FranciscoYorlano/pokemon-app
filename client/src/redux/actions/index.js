@@ -3,83 +3,38 @@ import { BACKEND_BASE_URI } from "../../config";
 
 // ======================== Action Types
 
-// Global Error
+// Global Error / Global Success
 export const GLOBAL_ERROR_SET = "GLOBAL_ERROR_SET";
 export const GLOBAL_ERROR_REMOVE = "GLOBAL_ERROR_REMOVE";
-
-// Global Success
 export const GLOBAL_SUCCESS_SET = "GLOBAL_SUCCESS_SET";
 export const GLOBAL_SUCCESS_REMOVE = "GLOBAL_SUCCESS_REMOVE";
 
-// All Pokemons
-export const ALL_POKEMONS_GET = "GET_ALL_POKEMONS";
-
-// Search value
-export const SEARCH_VALUE_SET = "SEARCH_VALUE_SET";
-export const SEARCH_VALUE_REMOVE = "SEARCH_VALUE_REMOVE";
-
-// Pokemons
-export const POKEMONS_FILTER_BY_TYPE = "POKEMONS_FILTER_BY_TYPE";
-export const POKEMONS_FILTER_BY_SOURCE = "POKEMONS_FILTER_BY_SOURCE";
-export const POKEMONS_ORDER = "POKEMONS_ORDER";
-
-export const POKEMONS_BY_NAME_GET = "POKEMONS_GET_BY_NAME";
-export const POKEMONS_REMOVE = "POKEMONS_REMOVE";
-
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const SET_POKEMONS_PER_PAGE = "SET_POKEMONS_PER_PAGE";
-
-export const USER_FAVORITES_SET = "USER_FAVORITES_SET";
-
-// Pokemon Detail
-export const POKEMON_DETAIL_GET = "POKEMON_DETAIL_GET";
-export const POKEMON_DETAIL_REMOVE = "POKEMON_DETAIL_REMOVE";
-
-// Types
-export const TYPES_GET = "TYPES_GET";
-
-// Create Pokemon
-export const CREATE_POKEMON = "CREATE_POKEMON";
-
-// Users
-export const USER_CREATE = "USER_CREATE";
-export const USER_VALIDATE = "USER_VALIDATE";
-export const USER_ERROR = "USER_ERROR";
-export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
-export const USER_SIGN_OUT = "USER_SIGN_OUT";
-
-// Users Pokemons
-export const USER_POKEMONS_SET = "USER_POKEMONS_SET";
-export const USER_POKEMONS_REMOVE = "USER_POKEMONS_REMOVE";
-export const USER_POKEMONS_ADD = "USER_POKEMONS_ADD";
-export const USER_POKEMONS_DELETE = "USER_POKEMONS_DELETE";
-
-// ======================== Action Creators
 export const setGlobalError = (error) => {
     return {
         type: GLOBAL_ERROR_SET,
         payload: error,
     };
 };
-
 export const removeGlobalError = () => {
     return {
         type: GLOBAL_ERROR_REMOVE,
     };
 };
-
 export const setGlobalSuccess = (message) => {
     return {
         type: GLOBAL_SUCCESS_SET,
         payload: message,
     };
 };
-
 export const removeGlobalSuccess = () => {
     return {
         type: GLOBAL_SUCCESS_REMOVE,
     };
 };
+
+// Pokemons ==========================================
+// Get All
+export const ALL_POKEMONS_GET = "GET_ALL_POKEMONS";
 
 export const getAllPokemons = () => {
     return async (dispatch) => {
@@ -96,18 +51,10 @@ export const getAllPokemons = () => {
     };
 };
 
-export const setSearchValue = (value) => {
-    return {
-        type: SEARCH_VALUE_SET,
-        payload: value,
-    };
-};
-
-export const removeSearchValue = () => {
-    return {
-        type: SEARCH_VALUE_REMOVE,
-    };
-};
+// Filters, sort
+export const POKEMONS_FILTER_BY_TYPE = "POKEMONS_FILTER_BY_TYPE";
+export const POKEMONS_FILTER_BY_SOURCE = "POKEMONS_FILTER_BY_SOURCE";
+export const POKEMONS_SORT = "POKEMONS_SORT";
 
 export const filterPokemonsByType = (type) => {
     return {
@@ -115,26 +62,23 @@ export const filterPokemonsByType = (type) => {
         payload: type,
     };
 };
-
 export const filterPokemonsBySource = (source) => {
     return {
         type: POKEMONS_FILTER_BY_SOURCE,
         payload: source,
     };
 };
-
-export const orderPokemons = (order) => {
+export const sortPokemons = (sort) => {
     return {
-        type: POKEMONS_ORDER,
-        payload: order,
+        type: POKEMONS_SORT,
+        payload: sort,
     };
 };
 
-export const removePokemons = () => {
-    return {
-        type: POKEMONS_REMOVE,
-    };
-};
+// Search - Favorites set - Reset
+export const POKEMONS_BY_NAME_GET = "POKEMONS_GET_BY_NAME";
+export const USER_FAVORITES_SET = "USER_FAVORITES_SET";
+export const POKEMONS_RESET = "POKEMONS_RESET";
 
 export const getPokemonsByName = (name) => {
     return async (dispatch) => {
@@ -152,12 +96,20 @@ export const getPokemonsByName = (name) => {
         }
     };
 };
-
 export const setUserFavorites = () => {
     return {
         type: USER_FAVORITES_SET,
     };
 };
+export const resetPokemons = () => {
+    return {
+        type: POKEMONS_RESET,
+    };
+};
+
+// Pagination ==============================================
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_POKEMONS_PER_PAGE = "SET_POKEMONS_PER_PAGE";
 
 export const setCurrentPage = (page) => {
     return {
@@ -165,13 +117,17 @@ export const setCurrentPage = (page) => {
         payload: page,
     };
 };
-
 export const setPokemonsPerPage = (pokemonsPerPage) => {
     return {
         type: SET_POKEMONS_PER_PAGE,
         payload: pokemonsPerPage,
     };
 };
+
+// App features: Detail - Create =========================
+// Detail
+export const POKEMON_DETAIL_GET = "POKEMON_DETAIL_GET";
+export const POKEMON_DETAIL_REMOVE = "POKEMON_DETAIL_REMOVE";
 
 export const getPokemonDetail = (id) => {
     return async (dispatch) => {
@@ -189,27 +145,14 @@ export const getPokemonDetail = (id) => {
         }
     };
 };
-
 export const removePokemonDetail = () => {
     return {
         type: POKEMON_DETAIL_REMOVE,
     };
 };
 
-export const getAllTypes = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`${BACKEND_BASE_URI}/types`);
-            const types = response.data;
-            dispatch({ type: TYPES_GET, payload: types });
-        } catch (error) {
-            dispatch({
-                type: GLOBAL_ERROR_SET,
-                payload: error.response.data.error,
-            });
-        }
-    };
-};
+// Create
+export const CREATE_POKEMON = "CREATE_POKEMON";
 
 export const createPokemon = (newPokemon) => {
     return async (dispatch) => {
@@ -232,6 +175,30 @@ export const createPokemon = (newPokemon) => {
     };
 };
 
+// Types =================================================
+export const TYPES_GET = "TYPES_GET";
+
+export const getAllTypes = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(`${BACKEND_BASE_URI}/types`);
+            const types = response.data;
+            dispatch({ type: TYPES_GET, payload: types });
+        } catch (error) {
+            dispatch({
+                type: GLOBAL_ERROR_SET,
+                payload: error.response.data.error,
+            });
+        }
+    };
+};
+
+// Users =================================================
+// Create - Validate -Sign out
+export const USER_CREATE = "USER_CREATE";
+export const USER_VALIDATE = "USER_VALIDATE";
+export const USER_SIGN_OUT = "USER_SIGN_OUT";
+
 export const createUser = (userData) => {
     return async (dispatch) => {
         try {
@@ -252,7 +219,6 @@ export const createUser = (userData) => {
         }
     };
 };
-
 export const validateUser = (userData) => {
     return async (dispatch) => {
         try {
@@ -272,6 +238,14 @@ export const validateUser = (userData) => {
         }
     };
 };
+export const signout = () => {
+    return {
+        type: USER_SIGN_OUT,
+    };
+};
+
+export const USER_ERROR = "USER_ERROR"; // Not developed yet
+export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
 
 export const removeUserError = () => {
     return {
@@ -279,11 +253,11 @@ export const removeUserError = () => {
     };
 };
 
-export const signout = () => {
-    return {
-        type: USER_SIGN_OUT,
-    };
-};
+// Users Pokemons ========================================
+// Get all - Add - Delete
+export const USER_POKEMONS_GET = "USER_POKEMONS_GET";
+export const USER_POKEMON_ADD = "USER_POKEMON_ADD";
+export const USER_POKEMON_DELETE = "USER_POKEMON_DELETE";
 
 export const getUserPokemonByUserId = (userId) => {
     return async (dispatch) => {
@@ -292,7 +266,7 @@ export const getUserPokemonByUserId = (userId) => {
                 `${BACKEND_BASE_URI}/userspokemons/${userId}`
             );
             dispatch({
-                type: USER_POKEMONS_SET,
+                type: USER_POKEMONS_GET,
                 payload: response.data,
             });
         } catch (error) {
@@ -304,12 +278,6 @@ export const getUserPokemonByUserId = (userId) => {
     };
 };
 
-export const removeUserPokemons = () => {
-    return {
-        type: USER_POKEMONS_REMOVE,
-    };
-};
-
 export const addPokemonToUserPokemons = (data) => {
     return async (dispatch) => {
         try {
@@ -318,7 +286,7 @@ export const addPokemonToUserPokemons = (data) => {
                 data
             );
             dispatch({
-                type: USER_POKEMONS_ADD,
+                type: USER_POKEMON_ADD,
                 payload: response.data,
             });
         } catch (error) {
@@ -337,7 +305,7 @@ export const deletePokemonFromUserPokemons = (data) => {
                 `${BACKEND_BASE_URI}/userspokemons?userId=${data.userId}&pokemonId=${data.pokemonId}`
             );
             dispatch({
-                type: USER_POKEMONS_DELETE,
+                type: USER_POKEMON_DELETE,
                 payload: data.pokemonId,
             });
         } catch (error) {
@@ -346,5 +314,13 @@ export const deletePokemonFromUserPokemons = (data) => {
                 payload: error.response.data.error,
             });
         }
+    };
+};
+
+// Its okay?
+export const USER_POKEMONS_REMOVE = "USER_POKEMONS_REMOVE";
+export const removeUserPokemons = () => {
+    return {
+        type: USER_POKEMONS_REMOVE,
     };
 };

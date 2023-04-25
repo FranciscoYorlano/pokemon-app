@@ -5,12 +5,10 @@ import {
     GLOBAL_SUCCESS_SET,
     GLOBAL_SUCCESS_REMOVE,
     ALL_POKEMONS_GET,
-    SEARCH_VALUE_SET,
-    SEARCH_VALUE_REMOVE,
     POKEMONS_FILTER_BY_TYPE,
     POKEMONS_FILTER_BY_SOURCE,
-    POKEMONS_ORDER,
-    POKEMONS_REMOVE,
+    POKEMONS_SORT,
+    POKEMONS_RESET,
     POKEMONS_BY_NAME_GET,
     POKEMON_DETAIL_GET,
     POKEMON_DETAIL_REMOVE,
@@ -21,10 +19,10 @@ import {
     USER_ERROR,
     USER_ERROR_REMOVE,
     USER_SIGN_OUT,
-    USER_POKEMONS_SET,
+    USER_POKEMONS_GET,
     USER_POKEMONS_REMOVE,
-    USER_POKEMONS_ADD,
-    USER_POKEMONS_DELETE,
+    USER_POKEMON_ADD,
+    USER_POKEMON_DELETE,
     SET_CURRENT_PAGE,
     SET_POKEMONS_PER_PAGE,
     USER_FAVORITES_SET,
@@ -32,32 +30,37 @@ import {
 
 // ======================== Consts
 import { FILTERS, SORTS } from "../../const";
-
 const { BY_TYPE, BY_SOURCE } = FILTERS;
 
 // ======================== Initial State
 
 const initialState = {
+    // Global info
     globalError: "",
     globalSuccess: "",
+
+    // Pokemons
     allPokemons: [],
     pokemons: [],
-    searchValue: "",
+    userPokemons: [],
 
+    // Types & detail
+    types: [],
+    pokemonDetail: {},
+
+    // User view data
     filtersValues: {
         byType: BY_TYPE.ALL_TYPES,
         bySource: BY_SOURCE.ALL_SOURCES,
     },
-    orderValue: SORTS.DEFAULT,
+    sort: SORTS.DEFAULT,
     currentPage: 1,
     pokemonsPerPage: 12,
 
-    pokemonDetail: {},
-    types: [],
-    signInError: "",
+    // User
     isLogin: false,
     userData: {},
-    userPokemons: [],
+    signInError: "",
 };
 
 // ======================== Apply filters function
@@ -110,19 +113,6 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: action.payload,
             };
 
-        // Search value
-        case SEARCH_VALUE_SET:
-            return {
-                ...state,
-                searchValue: action.payload,
-            };
-
-        case SEARCH_VALUE_REMOVE:
-            return {
-                ...state,
-                searchValue: "",
-            };
-
         // Pokemons
         case POKEMONS_FILTER_BY_TYPE:
             const filteredPokemonsByType = applyFilters(
@@ -155,7 +145,7 @@ const rootReducer = (state = initialState, action) => {
                 },
             };
 
-        case POKEMONS_ORDER:
+        case POKEMONS_SORT:
             let orderedPokemons = [...state.pokemons];
 
             switch (action.payload) {
@@ -163,7 +153,7 @@ const rootReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         pokemons: state.allPokemons,
-                        orderValue: action.payload,
+                        sort: action.payload,
                     };
                 case SORTS.ALPHABETICAL_ASC:
                     orderedPokemons.sort((a, b) =>
@@ -187,9 +177,9 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: orderedPokemons,
-                orderValue: action.payload,
+                sort: action.payload,
             };
-        case POKEMONS_REMOVE:
+        case POKEMONS_RESET:
             return { ...state, pokemons: state.allPokemons };
         case POKEMONS_BY_NAME_GET:
             return { ...state, pokemons: action.payload };
@@ -257,7 +247,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         // User Pokemons
-        case USER_POKEMONS_SET:
+        case USER_POKEMONS_GET:
             return {
                 ...state,
                 userPokemons: action.payload,
@@ -269,12 +259,12 @@ const rootReducer = (state = initialState, action) => {
                 userPokemons: [],
             };
 
-        case USER_POKEMONS_ADD:
+        case USER_POKEMON_ADD:
             return {
                 ...state,
                 userPokemons: [...state.userPokemons, action.payload],
             };
-        case USER_POKEMONS_DELETE:
+        case USER_POKEMON_DELETE:
             return {
                 ...state,
                 userPokemons: state.userPokemons.filter(
