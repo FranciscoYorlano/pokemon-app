@@ -22,14 +22,13 @@ import {
 
 const Home = (props) => {
     const { pokemons, userPokemons, currentPage, pokemonsPerPage } = props;
+    const { setUserFavorites, resetPokemons } = props;
 
     // Redux
     const isHome = useLocation().pathname === "/home";
     useEffect(() => {
         isHome ? resetPokemons() : setUserFavorites();
-    }, [isHome]);
-
-    const { setUserFavorites, resetPokemons } = props;
+    }, [isHome, userPokemons]);
 
     // Pagination
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
@@ -41,7 +40,6 @@ const Home = (props) => {
         (currentPage - 1) * pokemonsPerPage,
         currentPage * pokemonsPerPage
     );
-
     const paginatedPokemons = paginatedPokemonsPre.map((pokemon) => ({
         ...pokemon,
         isFav: userPokemons.map((p) => p.id).includes(pokemon.id),
