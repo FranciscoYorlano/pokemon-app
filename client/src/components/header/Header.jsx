@@ -11,14 +11,26 @@ import { useNavigate } from "react-router-dom";
 
 // ======================== React Redux
 import { connect } from "react-redux";
-import { getPokemonsByName, resetPokemons, signout } from "../../redux/actions";
+import {
+    getPokemonsByName,
+    resetPokemons,
+    signout,
+    setLocation,
+} from "../../redux/actions";
 
 // ======================== Consts
 import { USER } from "../../const";
+import { PAGES } from "../../const";
 
 const Header = (props) => {
-    const { getPokemonsByName, resetPokemons, isLogin, userData, signout } =
-        props;
+    const {
+        getPokemonsByName,
+        resetPokemons,
+        isLogin,
+        userData,
+        signout,
+        setLocation,
+    } = props;
 
     // Dropdown menu
     const [showDropdown, setShowDropdown] = useState(false);
@@ -37,8 +49,14 @@ const Header = (props) => {
     const navigate = useNavigate();
     const handleSearchsubmit = (event) => {
         event.preventDefault();
-        name === "" ? resetPokemons() : getPokemonsByName(name);
         navigate("/home");
+        if (name === "") {
+            setLocation(PAGES.HOME);
+            resetPokemons();
+        } else {
+            setLocation(PAGES.SEARCH);
+            getPokemonsByName(name);
+        }
     };
 
     const handleButtonClick = (event) => {
@@ -279,6 +297,7 @@ const mapDispatchToProps = (dispatch) => {
         getPokemonsByName: (name) => dispatch(getPokemonsByName(name)),
         resetPokemons: () => dispatch(resetPokemons()),
         signout: () => dispatch(signout()),
+        setLocation: (location) => dispatch(setLocation(location)),
     };
 };
 

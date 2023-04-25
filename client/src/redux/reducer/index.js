@@ -1,5 +1,8 @@
 // ======================== Action Types
 import {
+    // Location ==========================================
+    LOCATION_SET,
+
     // Global Error / Global Success =====================
     GLOBAL_ERROR_SET,
     GLOBAL_ERROR_REMOVE,
@@ -18,21 +21,21 @@ import {
     POKEMONS_BY_NAME_GET,
     POKEMONS_RESET,
 
-    // Pagination ==============================================
+    // Pagination ========================================
     SET_CURRENT_PAGE,
     SET_POKEMONS_PER_PAGE,
 
-    // App features: Detail - Create =========================
+    // App features: Detail - Create =====================
     // Detail
     POKEMON_DETAIL_GET,
     POKEMON_DETAIL_REMOVE,
     // Create
     CREATE_POKEMON,
 
-    // Types =================================================
+    // Types =============================================
     TYPES_GET,
 
-    // Users =================================================
+    // Users =============================================
     // Create - Validate -Sign out
     USER_CREATE,
     USER_VALIDATE,
@@ -41,7 +44,7 @@ import {
     USER_ERROR_SET,
     USER_ERROR_REMOVE,
 
-    // Users Pokemons ========================================
+    // Users Pokemons ====================================
     // Get all - Add - Delete
     USER_POKEMONS_GET,
     USER_POKEMON_ADD,
@@ -50,11 +53,15 @@ import {
 
 // ======================== Consts
 import { FILTERS, SORTS } from "../../const";
+import { PAGES } from "../../const";
 const { BY_TYPE, BY_SOURCE } = FILTERS;
 
 // ======================== Initial State
 
 const initialState = {
+    // Location
+    location: "",
+
     // Global info
     globalError: "",
     globalSuccess: "",
@@ -64,6 +71,7 @@ const initialState = {
     pokemons: [],
     userPokemons: [],
     pokemonDetail: {},
+    pokemonsByName: [],
 
     // Types
     types: [],
@@ -111,9 +119,13 @@ const applyFilters = (allPokemons, byType, bySource) => {
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
+    console.log(state);
     console.log(action);
-
     switch (action.type) {
+        // Location ==============================================
+        case LOCATION_SET:
+            return { ...state, location: action.payload };
+
         // Global Error / Global Success =========================
         case GLOBAL_ERROR_SET:
             return { ...state, globalError: action.payload };
@@ -135,11 +147,31 @@ const rootReducer = (state = initialState, action) => {
 
         // Filters, sort
         case POKEMONS_FILTER_BY_TYPE:
-            const filteredPokemonsByType = applyFilters(
-                state.allPokemons,
-                action.payload,
-                state.filters.bySource
-            );
+            let filteredPokemonsByType = [];
+
+            if (state.location === PAGES.HOME) {
+                filteredPokemonsByType = applyFilters(
+                    state.allPokemons,
+                    action.payload,
+                    state.filters.bySource
+                );
+            }
+
+            if (state.location === PAGES.FAVORITES) {
+                filteredPokemonsByType = applyFilters(
+                    state.userPokemons,
+                    action.payload,
+                    state.filters.bySource
+                );
+            }
+
+            if (state.location === PAGES.SEARCH) {
+                filteredPokemonsByType = applyFilters(
+                    state.pokemonsByName,
+                    action.payload,
+                    state.filters.bySource
+                );
+            }
 
             return {
                 ...state,
@@ -150,11 +182,31 @@ const rootReducer = (state = initialState, action) => {
                 },
             };
         case POKEMONS_FILTER_BY_SOURCE:
-            const filteredPokemonsBySource = applyFilters(
-                state.allPokemons,
-                state.filters.byType,
-                action.payload
-            );
+            let filteredPokemonsBySource = [];
+
+            if (state.location === PAGES.HOME) {
+                filteredPokemonsBySource = applyFilters(
+                    state.allPokemons,
+                    state.filters.byType,
+                    action.payload
+                );
+            }
+
+            if (state.location === PAGES.FAVORITES) {
+                filteredPokemonsBySource = applyFilters(
+                    state.userPokemons,
+                    state.filters.byType,
+                    action.payload
+                );
+            }
+
+            if (state.location === PAGES.SEARCH) {
+                filteredPokemonsBySource = applyFilters(
+                    state.pokemonsByName,
+                    state.filters.byType,
+                    action.payload
+                );
+            }
 
             return {
                 ...state,
@@ -169,10 +221,18 @@ const rootReducer = (state = initialState, action) => {
 
             switch (action.payload) {
                 case SORTS.DEFAULT:
+                    let pokemonBaseToFilterSortDefault = [];
+                    if (state.location === PAGES.HOME)
+                        pokemonBaseToFilterSortDefault = state.allPokemons;
+                    if (state.location === PAGES.FAVORITES)
+                        pokemonBaseToFilterSortDefault = state.userPokemons;
+                    if (state.location === PAGES.SEARCH)
+                        pokemonBaseToFilterSortDefault = state.pokemonsByName;
+                    console.log(pokemonBaseToFilterSortDefault);
                     return {
                         ...state,
                         pokemons: applyFilters(
-                            state.allPokemons,
+                            pokemonBaseToFilterSortDefault,
                             state.filters.byType,
                             state.filters.bySource
                         ),
@@ -207,6 +267,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: action.payload,
+                pokemonsByName: action.payload,
                 filters: {
                     ...state.filters,
                     byType: BY_TYPE.ALL_TYPES,
@@ -229,6 +290,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: state.allPokemons,
+                pokemonsByName: [],
                 filters: {
                     ...state.filters,
                     byType: BY_TYPE.ALL_TYPES,

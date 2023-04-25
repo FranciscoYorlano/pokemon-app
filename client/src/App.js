@@ -21,7 +21,14 @@ import { useEffect } from "react";
 
 // ======================== React Redux
 import { connect } from "react-redux";
-import { getAllPokemons, getUserPokemonsByUserId } from "../src/redux/actions";
+import {
+    getAllPokemons,
+    getUserPokemonsByUserId,
+    setLocation,
+} from "../src/redux/actions";
+
+// ======================== Consts
+import { PAGES } from "./const";
 
 function App(props) {
     const {
@@ -33,7 +40,7 @@ function App(props) {
         userPokemons,
     } = props;
 
-    const { getAllPokemons, getUserPokemonsByUserId } = props;
+    const { getAllPokemons, getUserPokemonsByUserId, setLocation } = props;
     const location = useLocation().pathname;
 
     // ALERT & SUCCESS
@@ -76,6 +83,10 @@ function App(props) {
             !userPokemons.length && getUserPokemonsByUserId(userData.id);
         }
     }, [isLogin]);
+    useEffect(() => {
+        if (location === "/home") setLocation(PAGES.HOME);
+        if (location === `/${userData.username}`) setLocation(PAGES.FAVORITES);
+    }, [location]);
 
     return (
         <>
@@ -114,6 +125,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllPokemons: () => dispatch(getAllPokemons()),
         getUserPokemonsByUserId: (userId) =>
             dispatch(getUserPokemonsByUserId(userId)),
+        setLocation: (location) => dispatch(setLocation(location)),
     };
 };
 

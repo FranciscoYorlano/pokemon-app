@@ -7,7 +7,8 @@ import Navbar from "../../components/navbar/Navbar";
 import Pagination from "../../components/pagination/Pagination";
 
 // ======================== Hooks
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // ======================== Redux
 import { connect } from "react-redux";
@@ -18,7 +19,6 @@ import {
     setUserFavorites,
     resetPokemons,
 } from "../../redux/actions";
-import { useLocation } from "react-router-dom";
 
 const Home = (props) => {
     const { pokemons, userPokemons, currentPage, pokemonsPerPage } = props;

@@ -3,6 +3,16 @@ import { BACKEND_BASE_URI } from "../../config";
 
 // ======================== Action Types
 
+// Location ==============================================
+export const LOCATION_SET = "LOCATION_SET";
+
+export const setLocation = (location) => {
+    return {
+        type: LOCATION_SET,
+        payload: location,
+    };
+};
+
 // Global Error / Global Success =========================
 export const GLOBAL_ERROR_SET = "GLOBAL_ERROR_SET";
 export const GLOBAL_ERROR_REMOVE = "GLOBAL_ERROR_REMOVE";
@@ -219,10 +229,10 @@ export const createUser = (userData) => {
         }
     };
 };
-export const validateUser = (userData) => {
+export const validateUser = (credentials) => {
     return async (dispatch) => {
         try {
-            const { email, password } = userData;
+            const { email, password } = credentials;
             const response = await axios.get(
                 `${BACKEND_BASE_URI}/users?email=${email}&password=${password}`
             );

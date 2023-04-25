@@ -63,7 +63,7 @@ const Signin = (props) => {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        validateUser(userData);
+        await validateUser(userData);
         setUserData({ ...userData, password: "" });
     };
 
