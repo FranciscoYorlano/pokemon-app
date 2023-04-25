@@ -1,6 +1,6 @@
 // ======================== Styles
 import styles from "./create.module.css";
-import pikachu from "../../assets/pikachu.png";
+import logo from "../../assets/logo.png";
 
 // ======================== Validators
 import { validateCreate, validateTypes } from "../../functions/validateCreate";
@@ -212,7 +212,7 @@ const Create = () => {
         <div className={styles.createContainer}>
             <div className={styles.formContainer}>
                 <form onSubmit={submitHandler}>
-                    <div className={styles.row}>
+                    <div className={styles.rowDouble}>
                         <div className={styles.textInput}>
                             <label htmlFor="name">Name:</label>
                             <input
@@ -250,7 +250,7 @@ const Create = () => {
                         </div>
                     </div>
 
-                    <div className={styles.statsRow}>
+                    <div className={styles.rowTriple}>
                         <div className={styles.stat}>
                             <label htmlFor="life">Life:</label>
                             <input
@@ -301,7 +301,7 @@ const Create = () => {
                         </div>
                     </div>
 
-                    <div className={styles.statsRow}>
+                    <div className={styles.rowTriple}>
                         <div className={styles.stat}>
                             <label htmlFor="speed">Speed:</label>
                             <input
@@ -398,12 +398,12 @@ const Create = () => {
                     src={
                         newPokemon.image.slice(-3) === "png" && !errors.image
                             ? newPokemon.image
-                            : pikachu
+                            : logo
                     }
                     alt="Create Pokemon"
                 />
                 <div className={styles.info}>
-                    <h2>
+                    <h2 className={styles.namePreview}>
                         {newPokemon.name.length && !errors.name
                             ? newPokemon.name.replace(/\s(?=\w)/g, "")
                             : "Your pokemon"}

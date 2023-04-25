@@ -124,14 +124,9 @@
     color: #fff;
     border-radius: 5rem;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 400;
     padding: 0.5rem 1rem;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.363);
-}
-
-.typesLabel {
-    font-size: 1rem;
-    color: #006571;
 }
 
 .bodyStats {
@@ -148,6 +143,71 @@
     color: #006571;
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        height: auto;
+    }
+
+    .imageContainer {
+        height: 20vh;
+    }
+
+    .textContainer {
+        display: none;
+    }
+
+    .detailContainer {
+        flex-direction: column;
+    }
+
+    .rightContainer,
+    .leftContainer {
+        width: 100%;
+        padding: 1rem 0.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        display: none;
+    }
+
+    .label {
+        width: 18%;
+        font-size: 0.9rem;
+    }
+
+    .id {
+        font-size: 0.9rem;
+    }
+
+    .progressBar {
+        width: 80%;
+    }
+
+    .progress {
+        height: 100%;
+        background-color: #4caf50;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .progressValue {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        color: #006571;
+        font-weight: bold;
+    }
 }
 
 /* Loader */

@@ -120,7 +120,6 @@ input:focus {
     border-radius: 8px;
     font-size: 1.5rem;
     cursor: pointer;
-    font-family: "Montserrat", sans-serif;
 }
 
 .buttonSubmit:disabled {

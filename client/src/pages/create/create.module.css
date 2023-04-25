@@ -2,66 +2,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: calc(100vh - 60px);
-    width: 100%;
+    height: calc(100vh - 8rem);
+    margin-top: 5rem;
+    width: 100vw;
 }
 
-.formContainer {
+.formContainer,
+.previewContainer {
     width: 50%;
     padding: 0 3rem;
     box-sizing: border-box;
     text-align: center;
 }
 
-.title {
-    color: #006571;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.description {
-    color: #006571;
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-}
-
-.row {
+/* FIRST ROW */
+.rowDouble {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     gap: 1rem;
 }
 
-.statsRow {
-    margin-top: 1rem;
+.textInput {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 45%;
 }
 
-.textInput {
-    display: block;
-    width: 47.4%;
+/* OTHERS ROWS */
+.rowTriple {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .stat {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 30%;
 }
 
+/* ALL */
 .formContainer label {
+    text-align: left;
+    display: block;
     color: #006571;
     font-weight: 600;
     font-size: 1rem;
-}
-
-.typesSelectors label {
-    margin-bottom: 0rem;
+    padding: 0 0.5rem;
 }
 
 .input {
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem;
     background-color: #fff;
     font-weight: 400;
     line-height: 1.5;
@@ -69,7 +63,6 @@
     box-shadow: none;
     font-size: 1rem;
     border-radius: 0.8rem;
-    width: -webkit-fill-available;
     border: 1px solid #ced4da;
 }
 
@@ -91,12 +84,12 @@ input:focus {
 
 .spanError {
     color: #dc3545;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
 }
 
 .typesSelectors {
-    margin-top: 1rem;
+    margin-top: 0.2rem;
     margin-bottom: 0.2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
@@ -111,6 +104,11 @@ input:focus {
     width: 7rem;
 }
 
+.typesSelectors label {
+    padding: 0 0.1rem;
+}
+
+/* LOADER */
 .loadingContainer {
     display: flex;
     flex-wrap: wrap;
@@ -143,7 +141,7 @@ input:focus {
 .buttonSubmit {
     background: linear-gradient(to bottom right, #8a2be2, #4b0082);
     color: #ffffff;
-    padding: 8px 12px;
+    padding: 0.6rem 0.8rem;
     margin-top: 1rem;
     border: none;
     display: block;
@@ -151,23 +149,28 @@ input:focus {
     border-radius: 8px;
     font-size: 1.5rem;
     cursor: pointer;
-    font-family: "Montserrat", sans-serif;
 }
 
 .buttonSubmit:disabled {
     cursor: not-allowed;
 }
 
-.previewContainer {
-    padding: 0 3rem;
-    box-sizing: border-box;
-    text-align: center;
-    width: 50%;
+/* PREVIEW */
+.title {
+    color: #f9a826;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    color: #006571;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
 }
 
 .previewContainer img {
-    width: 15rem;
-    height: 15rem;
+    width: 40%;
+    height: 40%;
 }
 
 .info {
@@ -176,27 +179,30 @@ input:focus {
     align-items: center;
 }
 
-.name {
+.namePreview {
+    color: #006571;
     font-size: 2rem;
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .types {
+    margin: 1rem 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
     width: 100%;
 }
 
 .type {
     color: #fff;
-    border-radius: 0.8rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 0.25rem 0.5rem;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.363);
+    border-radius: 5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.363);
 }
 
 .previewText {
@@ -206,67 +212,20 @@ input:focus {
 
 /* Falta pantallas ipads y revisar telefonos */
 @media only screen and (max-width: 480px) {
-    @media screen and (max-width: 480px) {
-        .createContainer {
-            flex-direction: column;
-            height: auto;
-            padding: 1rem;
-        }
+    .createContainer {
+        height: auto;
+        flex-direction: column;
+    }
 
-        .formContainer,
-        .previewContainer {
-            width: 100%;
-            margin-top: 1rem;
-            padding: 1rem;
-        }
+    .formContainer,
+    .previewContainer {
+        width: 100%;
+        padding: 0 1rem;
+    }
 
-        .input {
-            width: 100%;
-        }
-
-        .row {
-            display: block;
-        }
-
-        .textInput,
-        .stat {
-            width: 100%;
-        }
-
-        .statInput {
-            width: 80%;
-        }
-
-        .typesSelectors {
-            grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-        }
-
-        .buttonSubmit {
-            margin-top: 2rem;
-            font-size: 1.2rem;
-        }
-
-        .previewContainer img {
-            width: 10rem;
-            height: 10rem;
-        }
-
-        .name {
-            font-size: 1.5rem;
-        }
-
-        .types {
-            font-size: 0.8rem;
-        }
-
-        .type {
-            font-size: 0.8rem;
-            padding: 0.1rem 0.3rem;
-        }
-
-        .previewText {
-            font-size: 0.8rem;
-        }
+    /* FIRST ROW */
+    .rowDouble {
+        margin-top: 0.5rem;
     }
 }
 
