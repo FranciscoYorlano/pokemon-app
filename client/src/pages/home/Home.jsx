@@ -16,7 +16,7 @@ import {
     getAllPokemons,
     getUserPokemonByUserId,
     setUserFavorites,
-    removePokemons,
+    resetPokemons,
 } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
 
@@ -26,10 +26,10 @@ const Home = (props) => {
     // Redux
     const isHome = useLocation().pathname === "/home";
     useEffect(() => {
-        isHome ? removePokemons() : setUserFavorites();
+        isHome ? resetPokemons() : setUserFavorites();
     }, [isHome]);
 
-    const { setUserFavorites, removePokemons } = props;
+    const { setUserFavorites, resetPokemons } = props;
 
     // Pagination
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
         getUserPokemonByUserId: (userId) =>
             dispatch(getUserPokemonByUserId(userId)),
         setUserFavorites: () => dispatch(setUserFavorites()),
-        removePokemons: () => dispatch(removePokemons()),
+        resetPokemons: () => dispatch(resetPokemons()),
     };
 };
 

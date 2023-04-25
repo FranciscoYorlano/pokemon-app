@@ -10,7 +10,7 @@ import {
     getAllTypes,
     filterPokemonsByType,
     filterPokemonsBySource,
-    orderPokemons,
+    sortPokemons,
     setPokemonsPerPage,
 } from "../../redux/actions";
 
@@ -55,10 +55,10 @@ const Navbar = (props) => {
         currentPage,
         types,
         filtersValues,
-        orderValue,
+        sort,
         filterPokemonsByType,
         filterPokemonsBySource,
-        orderPokemons,
+        sortPokemons,
         getAllTypes,
         pokemonsPerPage,
         totalPages,
@@ -85,7 +85,7 @@ const Navbar = (props) => {
 
     // Sort
     const handleOSort = (event) => {
-        orderPokemons(event.target.value);
+        sortPokemons(event.target.value);
     };
 
     return (
@@ -115,7 +115,7 @@ const Navbar = (props) => {
                     <SelectSource pokemons={pokemons} />
                 </select>
                 <span>Sort:</span>
-                <select value={orderValue} onChange={handleOSort}>
+                <select value={sort} onChange={handleOSort}>
                     <option value={SORTS.DEFAULT}>Default</option>
                     <option value={SORTS.ALPHABETICAL_ASC}>(A-Z)</option>
                     <option value={SORTS.ALPHABETICAL_DESC}>(Z-A)</option>
@@ -152,7 +152,7 @@ const mapStateToProps = (state) => {
         pokemons: state.pokemons,
         types: state.types,
         filtersValues: state.filtersValues,
-        orderValue: state.orderValue,
+        sort: state.sort,
         pokemonsPerPage: state.pokemonsPerPage,
     };
 };
@@ -162,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
         filterPokemonsByType: (type) => dispatch(filterPokemonsByType(type)),
         filterPokemonsBySource: (source) =>
             dispatch(filterPokemonsBySource(source)),
-        orderPokemons: (order) => dispatch(orderPokemons(order)),
+        sortPokemons: (sort) => dispatch(sortPokemons(sort)),
         getAllTypes: () => dispatch(getAllTypes()),
         setPokemonsPerPage: (pokemonsPerPage) =>
             dispatch(setPokemonsPerPage(pokemonsPerPage)),
