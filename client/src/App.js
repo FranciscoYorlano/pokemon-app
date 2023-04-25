@@ -21,7 +21,7 @@ import { useEffect } from "react";
 
 // ======================== React Redux
 import { connect } from "react-redux";
-import { getAllPokemons, getUserPokemonByUserId } from "../src/redux/actions";
+import { getAllPokemons, getUserPokemonsByUserId } from "../src/redux/actions";
 
 function App(props) {
     const {
@@ -33,7 +33,7 @@ function App(props) {
         userPokemons,
     } = props;
 
-    const { getAllPokemons, getUserPokemonByUserId } = props;
+    const { getAllPokemons, getUserPokemonsByUserId } = props;
     const location = useLocation().pathname;
 
     // ALERT & SUCCESS
@@ -73,7 +73,7 @@ function App(props) {
     useEffect(() => {
         !pokemons.length && getAllPokemons();
         if (isLogin) {
-            !userPokemons.length && getUserPokemonByUserId(userData.id);
+            !userPokemons.length && getUserPokemonsByUserId(userData.id);
         }
     }, [isLogin]);
 
@@ -112,8 +112,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllPokemons: () => dispatch(getAllPokemons()),
-        getUserPokemonByUserId: (userId) =>
-            dispatch(getUserPokemonByUserId(userId)),
+        getUserPokemonsByUserId: (userId) =>
+            dispatch(getUserPokemonsByUserId(userId)),
     };
 };
 

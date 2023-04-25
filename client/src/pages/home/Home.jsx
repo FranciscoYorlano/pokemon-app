@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 
 import {
     getAllPokemons,
-    getUserPokemonByUserId,
+    getUserPokemonsByUserId,
     setUserFavorites,
     resetPokemons,
 } from "../../redux/actions";
@@ -86,8 +86,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllPokemons: () => dispatch(getAllPokemons()),
-        getUserPokemonByUserId: (userId) =>
-            dispatch(getUserPokemonByUserId(userId)),
+        getUserPokemonsByUserId: (userId) =>
+            dispatch(getUserPokemonsByUserId(userId)),
         setUserFavorites: () => dispatch(setUserFavorites()),
         resetPokemons: () => dispatch(resetPokemons()),
     };

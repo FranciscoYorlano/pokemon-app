@@ -54,7 +54,7 @@ const Navbar = (props) => {
         pokemons,
         currentPage,
         types,
-        filtersValues,
+        filters,
         sort,
         filterPokemonsByType,
         filterPokemonsBySource,
@@ -92,10 +92,7 @@ const Navbar = (props) => {
         <div className={styles.navBar}>
             <div className={styles.left}>
                 <span>Filters: </span>
-                <select
-                    value={filtersValues.byType}
-                    onChange={handleFilterByType}
-                >
+                <select value={filters.byType} onChange={handleFilterByType}>
                     <option value={FILTERS.BY_TYPE.ALL_TYPES}>All types</option>
                     {types.map((type) => (
                         <SelectType
@@ -106,7 +103,7 @@ const Navbar = (props) => {
                     ))}
                 </select>
                 <select
-                    value={filtersValues.bySource}
+                    value={filters.bySource}
                     onChange={handleFilterBySource}
                 >
                     <option value={FILTERS.BY_SOURCE.ALL_SOURCES}>
@@ -151,7 +148,7 @@ const mapStateToProps = (state) => {
         currentPage: state.currentPage,
         pokemons: state.pokemons,
         types: state.types,
-        filtersValues: state.filtersValues,
+        filters: state.filters,
         sort: state.sort,
         pokemonsPerPage: state.pokemonsPerPage,
     };
