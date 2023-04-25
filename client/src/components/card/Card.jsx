@@ -49,9 +49,7 @@ const Card = (props) => {
                 {isLogin && isNaN(id) ? (
                     isFav ? (
                         <>
-                            <span
-                                className={`${styles.stat} ${styles.notPhones}`}
-                            >
+                            <span className={`${styles.stat}`}>
                                 <svg
                                     width="2rem"
                                     height="2rem"
@@ -155,9 +153,7 @@ const Card = (props) => {
                         </>
                     ) : (
                         <>
-                            <span
-                                className={`${styles.stat} ${styles.notPhones}`}
-                            >
+                            <span className={`${styles.stat}`}>
                                 <svg
                                     width="2rem"
                                     height="2rem"
@@ -262,7 +258,7 @@ const Card = (props) => {
                     )
                 ) : (
                     <>
-                        <span className={styles.stat}>
+                        <span className={`${styles.stat} ${styles.notPhones}`}>
                             <svg
                                 width="2rem"
                                 height="2rem"

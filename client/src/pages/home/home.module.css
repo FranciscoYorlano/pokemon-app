@@ -1,6 +1,6 @@
 .homeContainer {
     min-height: calc(100vh - 5rem);
-    width: 100%;
+    width: 100vw;
 }
 
 .homeImage {
