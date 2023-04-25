@@ -1,19 +1,37 @@
-.alertWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0 0 0;
-    margin-right: 0;
+.fadeOut {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
 }
 
+.marginImg {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+}
+
+.margin0 {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin: 1rem 0;
+}
+
+.margin5 {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin: 5rem 0 -4rem 0;
+}
 .alertContainer {
     position: relative;
     padding: 1rem 3rem;
     border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
+    border-radius: 0.8rem;
     background-color: #d4edda;
     color: #155724;
-    margin-bottom: 1rem;
 }
 
 .alertContainer p {
@@ -43,10 +61,4 @@
 
 .alertContainer p {
     margin: 0;
-}
-
-@media (max-width: 768px) {
-    .alertWrapper {
-        display: none;
-    }
 }

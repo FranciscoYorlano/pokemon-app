@@ -2,19 +2,28 @@
 import styles from "./alert.module.css";
 
 // ======================== Hooks
+import { useEffect } from "react";
+
+// ======================== Redux
 import { connect } from "react-redux";
 import { removeGlobalError } from "../../redux/actions";
 
 const Alert = (props) => {
-    const { globalError, removeGlobalError } = props;
+    const { globalError, removeGlobalError, alertClass } = props;
 
-    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            removeGlobalError();
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [globalError, removeGlobalError]);
+
     const handleCloseAlert = () => {
         removeGlobalError();
     };
 
     return (
-        <div className={styles.alertWrapper}>
+        <div className={`${styles[alertClass]}`}>
             <div className={styles.alertContainer}>
                 <button
                     type="button"
