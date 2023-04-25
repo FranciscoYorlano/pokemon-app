@@ -2,10 +2,10 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 require("dotenv").config();
 
-const { APP_PORT } = process.env;
+const PORT = process.env.PORT || 3001;
 
 conn.sync({ force: false }).then(() => {
-    server.listen(APP_PORT, () => {
+    server.listen(PORT, () => {
         console.log(`App listening at ${APP_PORT}`); // eslint-disable-line no-console
     });
 });
