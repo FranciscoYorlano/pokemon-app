@@ -3,7 +3,7 @@ import { BACKEND_BASE_URI } from "../../config";
 
 // ======================== Action Types
 
-// Global Error / Global Success
+// Global Error / Global Success =========================
 export const GLOBAL_ERROR_SET = "GLOBAL_ERROR_SET";
 export const GLOBAL_ERROR_REMOVE = "GLOBAL_ERROR_REMOVE";
 export const GLOBAL_SUCCESS_SET = "GLOBAL_SUCCESS_SET";
@@ -226,13 +226,14 @@ export const validateUser = (userData) => {
             const response = await axios.get(
                 `${BACKEND_BASE_URI}/users?email=${email}&password=${password}`
             );
+            const userData = response.data;
             dispatch({
                 type: USER_VALIDATE,
-                payload: response.data,
+                payload: userData,
             });
         } catch (error) {
             dispatch({
-                type: USER_ERROR,
+                type: USER_ERROR_SET,
                 payload: error.response.data.error,
             });
         }
@@ -244,7 +245,8 @@ export const signout = () => {
     };
 };
 
-export const USER_ERROR = "USER_ERROR"; // Not developed yet
+// User errors
+export const USER_ERROR_SET = "USER_ERROR_SET"; // Not developed yet
 export const USER_ERROR_REMOVE = "USER_ERROR_REMOVE";
 
 export const removeUserError = () => {
@@ -259,7 +261,7 @@ export const USER_POKEMONS_GET = "USER_POKEMONS_GET";
 export const USER_POKEMON_ADD = "USER_POKEMON_ADD";
 export const USER_POKEMON_DELETE = "USER_POKEMON_DELETE";
 
-export const getUserPokemonByUserId = (userId) => {
+export const getUserPokemonsByUserId = (userId) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(
@@ -285,9 +287,10 @@ export const addPokemonToUserPokemons = (data) => {
                 `${BACKEND_BASE_URI}/userspokemons`,
                 data
             );
+            const newUserPokemon = response.data;
             dispatch({
                 type: USER_POKEMON_ADD,
-                payload: response.data,
+                payload: newUserPokemon,
             });
         } catch (error) {
             dispatch({
@@ -314,13 +317,5 @@ export const deletePokemonFromUserPokemons = (data) => {
                 payload: error.response.data.error,
             });
         }
-    };
-};
-
-// Its okay?
-export const USER_POKEMONS_REMOVE = "USER_POKEMONS_REMOVE";
-export const removeUserPokemons = () => {
-    return {
-        type: USER_POKEMONS_REMOVE,
     };
 };

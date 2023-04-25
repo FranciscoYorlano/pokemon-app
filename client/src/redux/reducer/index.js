@@ -1,31 +1,51 @@
 // ======================== Action Types
 import {
+    // Global Error / Global Success =====================
     GLOBAL_ERROR_SET,
     GLOBAL_ERROR_REMOVE,
     GLOBAL_SUCCESS_SET,
     GLOBAL_SUCCESS_REMOVE,
+
+    // Pokemons ==========================================
+    // Get All
     ALL_POKEMONS_GET,
+    // Filters, sort
     POKEMONS_FILTER_BY_TYPE,
     POKEMONS_FILTER_BY_SOURCE,
     POKEMONS_SORT,
-    POKEMONS_RESET,
+    // Search - Favorites set - Reset
+    USER_FAVORITES_SET,
     POKEMONS_BY_NAME_GET,
-    POKEMON_DETAIL_GET,
-    POKEMON_DETAIL_REMOVE,
-    TYPES_GET,
-    CREATE_POKEMON,
-    USER_CREATE,
-    USER_VALIDATE,
-    USER_ERROR,
-    USER_ERROR_REMOVE,
-    USER_SIGN_OUT,
-    USER_POKEMONS_GET,
-    USER_POKEMONS_REMOVE,
-    USER_POKEMON_ADD,
-    USER_POKEMON_DELETE,
+    POKEMONS_RESET,
+
+    // Pagination ==============================================
     SET_CURRENT_PAGE,
     SET_POKEMONS_PER_PAGE,
-    USER_FAVORITES_SET,
+
+    // App features: Detail - Create =========================
+    // Detail
+    POKEMON_DETAIL_GET,
+    POKEMON_DETAIL_REMOVE,
+    // Create
+    CREATE_POKEMON,
+
+    // Types =================================================
+    TYPES_GET,
+
+    // Users =================================================
+    // Create - Validate -Sign out
+    USER_CREATE,
+    USER_VALIDATE,
+    USER_SIGN_OUT,
+    // User errors
+    USER_ERROR_SET,
+    USER_ERROR_REMOVE,
+
+    // Users Pokemons ========================================
+    // Get all - Add - Delete
+    USER_POKEMONS_GET,
+    USER_POKEMON_ADD,
+    USER_POKEMON_DELETE,
 } from "../actions";
 
 // ======================== Consts
@@ -43,19 +63,19 @@ const initialState = {
     allPokemons: [],
     pokemons: [],
     userPokemons: [],
-
-    // Types & detail
-    types: [],
     pokemonDetail: {},
 
-    // User view data
-    filtersValues: {
+    // Types
+    types: [],
+
+    // App data
+    pokemonsPerPage: 12,
+    currentPage: 1,
+    sort: SORTS.DEFAULT,
+    filters: {
         byType: BY_TYPE.ALL_TYPES,
         bySource: BY_SOURCE.ALL_SOURCES,
     },
-    sort: SORTS.DEFAULT,
-    currentPage: 1,
-    pokemonsPerPage: 12,
 
     // User
     isLogin: false,
@@ -92,20 +112,20 @@ const applyFilters = (allPokemons, byType, bySource) => {
 
 const rootReducer = (state = initialState, action) => {
     console.log(action);
+
     switch (action.type) {
-        // Global Error
+        // Global Error / Global Success =========================
         case GLOBAL_ERROR_SET:
             return { ...state, globalError: action.payload };
         case GLOBAL_ERROR_REMOVE:
             return { ...state, globalError: "" };
-
-        // Global Success
         case GLOBAL_SUCCESS_SET:
             return { ...state, globalSuccess: action.payload };
         case GLOBAL_SUCCESS_REMOVE:
             return { ...state, globalSuccess: "" };
 
-        // All pokemons
+        // Pokemons ==============================================
+        // Get & set all
         case ALL_POKEMONS_GET:
             return {
                 ...state,
@@ -113,38 +133,37 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: action.payload,
             };
 
-        // Pokemons
+        // Filters, sort
         case POKEMONS_FILTER_BY_TYPE:
             const filteredPokemonsByType = applyFilters(
                 state.allPokemons,
                 action.payload,
-                state.filtersValues.bySource
+                state.filters.bySource
             );
 
             return {
                 ...state,
                 pokemons: filteredPokemonsByType,
-                filtersValues: {
-                    ...state.filtersValues,
+                filters: {
+                    ...state.filters,
                     byType: action.payload,
                 },
             };
         case POKEMONS_FILTER_BY_SOURCE:
             const filteredPokemonsBySource = applyFilters(
                 state.allPokemons,
-                state.filtersValues.byType,
+                state.filters.byType,
                 action.payload
             );
 
             return {
                 ...state,
                 pokemons: filteredPokemonsBySource,
-                filtersValues: {
-                    ...state.filtersValues,
+                filters: {
+                    ...state.filters,
                     bySource: action.payload,
                 },
             };
-
         case POKEMONS_SORT:
             let orderedPokemons = [...state.pokemons];
 
@@ -152,7 +171,11 @@ const rootReducer = (state = initialState, action) => {
                 case SORTS.DEFAULT:
                     return {
                         ...state,
-                        pokemons: state.allPokemons,
+                        pokemons: applyFilters(
+                            state.allPokemons,
+                            state.filters.byType,
+                            state.filters.bySource
+                        ),
                         sort: action.payload,
                     };
                 case SORTS.ALPHABETICAL_ASC:
@@ -179,15 +202,42 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: orderedPokemons,
                 sort: action.payload,
             };
-        case POKEMONS_RESET:
-            return { ...state, pokemons: state.allPokemons };
+        // Search - Favorites set - Reset
         case POKEMONS_BY_NAME_GET:
-            return { ...state, pokemons: action.payload };
+            return {
+                ...state,
+                pokemons: action.payload,
+                filters: {
+                    ...state.filters,
+                    byType: BY_TYPE.ALL_TYPES,
+                    bySource: BY_SOURCE.ALL_SOURCES,
+                },
+                sort: SORTS.DEFAULT,
+            };
         case USER_FAVORITES_SET:
             return {
                 ...state,
                 pokemons: state.userPokemons,
+                filters: {
+                    ...state.filters,
+                    byType: BY_TYPE.ALL_TYPES,
+                    bySource: BY_SOURCE.ALL_SOURCES,
+                },
+                sort: SORTS.DEFAULT,
             };
+        case POKEMONS_RESET:
+            return {
+                ...state,
+                pokemons: state.allPokemons,
+                filters: {
+                    ...state.filters,
+                    byType: BY_TYPE.ALL_TYPES,
+                    bySource: BY_SOURCE.ALL_SOURCES,
+                },
+                sort: SORTS.DEFAULT,
+            };
+
+        // Pagination ============================================
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: action.payload };
         case SET_POKEMONS_PER_PAGE:
@@ -196,17 +246,13 @@ const rootReducer = (state = initialState, action) => {
                 pokemonsPerPage: action.payload,
             };
 
-        // Pokemon Detail
+        // App features: Detail - Create =========================
+        // Detail
         case POKEMON_DETAIL_GET:
             return { ...state, pokemonDetail: action.payload };
         case POKEMON_DETAIL_REMOVE:
             return { ...state, pokemonDetail: {} };
-
-        // Types
-        case TYPES_GET:
-            return { ...state, types: action.payload };
-
-        // Create Pokemon
+        // Create
         case CREATE_POKEMON:
             return {
                 ...state,
@@ -214,7 +260,12 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: [...state.pokemons, action.payload],
             };
 
-        // Users
+        // Types =================================================
+        case TYPES_GET:
+            return { ...state, types: action.payload };
+
+        // Users =================================================
+        // Create - Validate -Sign out
         case USER_CREATE:
             return {
                 ...state,
@@ -222,12 +273,19 @@ const rootReducer = (state = initialState, action) => {
         case USER_VALIDATE:
             return {
                 ...state,
-                signInError: "",
                 isLogin: true,
                 userData: action.payload,
                 signInError: "",
             };
-        case USER_ERROR:
+        case USER_SIGN_OUT:
+            return {
+                ...state,
+                isLogin: false,
+                userData: {},
+                userPokemons: [],
+            };
+        // User errors
+        case USER_ERROR_SET:
             return {
                 ...state,
                 signInError: action.payload,
@@ -238,27 +296,13 @@ const rootReducer = (state = initialState, action) => {
                 signInError: "",
             };
 
-        case USER_SIGN_OUT:
-            return {
-                ...state,
-                isLogin: false,
-                userData: {},
-                userPokemons: [],
-            };
-
-        // User Pokemons
+        // Users Pokemons ========================================
+        // Get all - Add - Delete
         case USER_POKEMONS_GET:
             return {
                 ...state,
                 userPokemons: action.payload,
             };
-
-        case USER_POKEMONS_REMOVE:
-            return {
-                ...state,
-                userPokemons: [],
-            };
-
         case USER_POKEMON_ADD:
             return {
                 ...state,
@@ -272,6 +316,7 @@ const rootReducer = (state = initialState, action) => {
                 ),
             };
 
+        // =======================================================
         default:
             return { ...state };
     }
