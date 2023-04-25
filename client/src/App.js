@@ -34,23 +34,39 @@ function App(props) {
     } = props;
 
     const { getAllPokemons, getUserPokemonByUserId } = props;
-
     const location = useLocation().pathname;
+
+    // ALERT & SUCCESS
     const locationAlerts = Boolean(
         location === "/home" ||
             location === "/detail/:id" ||
             location === "/create" ||
             location === "/signup" ||
-            location === "/signin"
-    );
-
-    const locationHeader = Boolean(
-        location !== "/" && location !== "/signin" && location !== "/signup"
+            location === "/signin" ||
+            (isLogin && location === `/${userData.username}`)
     );
 
     const showAlert = Boolean(globalError && locationAlerts);
     const showSuccessAlert = Boolean(
         globalSuccess && !globalError && locationAlerts
+    );
+
+    let alertClass = "";
+    if (
+        location === "/home" ||
+        location === "/detail/:id" ||
+        (isLogin && location === `/${userData.username}`)
+    ) {
+        alertClass = "marginImg";
+    } else if (location === "/signin" || location === "/signup") {
+        alertClass = "margin0";
+    } else {
+        alertClass = "margin5";
+    }
+
+    // HEADER
+    const locationHeader = Boolean(
+        location !== "/" && location !== "/signin" && location !== "/signup"
     );
 
     // Redux
@@ -59,13 +75,13 @@ function App(props) {
         if (isLogin) {
             !userPokemons.length && getUserPokemonByUserId(userData.id);
         }
-    }, [isLogin, userPokemons]);
+    }, [isLogin]);
 
     return (
         <>
             {locationHeader && <Header />}
-            {showAlert && <Alert />}
-            {showSuccessAlert && <SuccessAlert />}
+            {showAlert && <Alert alertClass={alertClass} />}
+            {showSuccessAlert && <SuccessAlert alertClass={alertClass} />}
             <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/home" element={<Home />} />
