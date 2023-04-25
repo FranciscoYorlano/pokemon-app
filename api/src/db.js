@@ -7,14 +7,12 @@ const userDefiner = require("./models/User");
 
 // ======================== Sequelize
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
+const { DATABASE_URL } = process.env;
 
-const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-    {
-        logging: false,
-        native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-    }
-);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    logging: false,
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+});
 
 // ======================== Models definers
 pokemonDefiner(sequelize);
