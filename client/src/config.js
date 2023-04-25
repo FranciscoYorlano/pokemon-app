@@ -1,1 +1,2 @@
-export const BACKEND_BASE_URI = "http://192.168.0.157:3001";
+export const BACKEND_BASE_URI =
+    "https://pi-pokemon-v20-production.up.railway.app";
