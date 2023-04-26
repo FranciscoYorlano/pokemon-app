@@ -28,7 +28,11 @@ const Home = (props) => {
     const isHome = useLocation().pathname === "/home";
     useEffect(() => {
         isHome ? resetPokemons() : setUserFavorites();
-    }, [isHome, userPokemons]);
+    }, [isHome]);
+
+    useEffect(() => {
+        !isHome && setUserFavorites();
+    }, [userPokemons]);
 
     // Pagination
     const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);

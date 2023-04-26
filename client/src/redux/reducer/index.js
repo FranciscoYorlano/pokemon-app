@@ -299,6 +299,7 @@ const rootReducer = (state = initialState, action) => {
                     bySource: BY_SOURCE.ALL_SOURCES,
                 },
                 sort: SORTS.DEFAULT,
+                currentPage: 1,
             };
 
         // Pagination ============================================
