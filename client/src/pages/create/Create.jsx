@@ -374,7 +374,7 @@ const Create = () => {
                         </div>
                     ) : (
                         <div className={styles.loadingContainer}>
-                            <span class={styles.loader}></span>
+                            <span className={styles.loader}></span>
                         </div>
                     )}
                     <span className={styles.spanError}>{errors.types}</span>

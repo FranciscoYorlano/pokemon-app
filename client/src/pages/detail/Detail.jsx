@@ -58,9 +58,9 @@ const Detail = () => {
                         </div>
                         <div className={styles.row}>
                             <p className={styles.label}>Life:</p>
-                            <div class={styles.progressBar}>
+                            <div className={styles.progressBar}>
                                 <div
-                                    class={styles.progress}
+                                    className={styles.progress}
                                     style={{
                                         width: `${
                                             pokemon.life > 100
@@ -69,7 +69,7 @@ const Detail = () => {
                                         }%`,
                                     }}
                                 >
-                                    <div class={styles.progressValue}>
+                                    <div className={styles.progressValue}>
                                         {pokemon.life}
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@ const Detail = () => {
                         <div className={styles.row}>
                             <p className={styles.label}>Attack:</p>
 
-                            <div class={styles.progressBar}>
+                            <div className={styles.progressBar}>
                                 <div
-                                    class={styles.progress}
+                                    className={styles.progress}
                                     style={{
                                         width: `${
                                             pokemon.attack > 100
@@ -89,7 +89,7 @@ const Detail = () => {
                                         }%`,
                                     }}
                                 >
-                                    <div class={styles.progressValue}>
+                                    <div className={styles.progressValue}>
                                         {pokemon.attack}
                                     </div>
                                 </div>
@@ -98,9 +98,9 @@ const Detail = () => {
                         <div className={styles.row}>
                             <p className={styles.label}>Defense:</p>
 
-                            <div class={styles.progressBar}>
+                            <div className={styles.progressBar}>
                                 <div
-                                    class={styles.progress}
+                                    className={styles.progress}
                                     style={{
                                         width: `${
                                             pokemon.defense > 100
@@ -109,7 +109,7 @@ const Detail = () => {
                                         }%`,
                                     }}
                                 >
-                                    <div class={styles.progressValue}>
+                                    <div className={styles.progressValue}>
                                         {pokemon.defense}
                                     </div>
                                 </div>
@@ -118,10 +118,10 @@ const Detail = () => {
                         <div className={styles.row}>
                             <p className={styles.label}>Speed:</p>
 
-                            <div class={styles.progressBar}>
+                            <div className={styles.progressBar}>
                                 {pokemon.speed ? (
                                     <div
-                                        class={styles.progress}
+                                        className={styles.progress}
                                         style={{
                                             width: `${
                                                 pokemon.speed > 100
@@ -131,7 +131,7 @@ const Detail = () => {
                                         }}
                                     >
                                         {" "}
-                                        <div class={styles.progressValue}>
+                                        <div className={styles.progressValue}>
                                             {pokemon.speed}
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@ const Detail = () => {
                 </div>
             ) : (
                 <div className={styles.loadingContainer}>
-                    <span class={styles.loader}></span>
+                    <span className={styles.loader}></span>
                 </div>
             )}
         </div>
