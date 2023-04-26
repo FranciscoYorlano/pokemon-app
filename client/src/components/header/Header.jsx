@@ -6,8 +6,8 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 // ======================== Hooks
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // ======================== React Redux
 import { connect } from "react-redux";
@@ -32,12 +32,17 @@ const Header = (props) => {
         setLocation,
     } = props;
 
-    // Dropdown menu
+    // Dropdown
+    const location = useLocation().pathname;
     const [showDropdown, setShowDropdown] = useState(false);
 
     const handleShowDropdown = () => {
         setShowDropdown((prev) => !prev);
     };
+
+    useEffect(() => {
+        setShowDropdown(false);
+    }, [location]);
 
     // Search bar
     const [name, setName] = useState("");
@@ -59,6 +64,7 @@ const Header = (props) => {
         }
     };
 
+    // Button sign in /out
     const handleButtonClick = (event) => {
         if (event.target.id === USER.SIGN_IN) navigate("/signin");
 
