@@ -44,6 +44,27 @@ const Header = (props) => {
         setShowDropdown(false);
     }, [location]);
 
+    // Background
+    const [opacity, setOpacity] = useState(0);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const handleScroll = () => {
+        if (window.pageYOffset > window.innerHeight * 0.4) {
+            setOpacity(0.7);
+        } else {
+            console.log(opacity);
+            setOpacity(window.pageYOffset / (window.innerHeight * 0.4) / 1.42);
+        }
+    };
+
+    const headerStyle = {
+        backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+    };
+
     // Search bar
     const [name, setName] = useState("");
 
@@ -72,7 +93,7 @@ const Header = (props) => {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={headerStyle}>
             <div className={styles.logo}>
                 <Link to="/">
                     <img
@@ -216,7 +237,7 @@ const Header = (props) => {
                     >
                         .
                         <svg
-                            fill="#ffffff"
+                            fill="#006571"
                             width="2rem"
                             height="2rem"
                             viewBox="0 0 32 32"
