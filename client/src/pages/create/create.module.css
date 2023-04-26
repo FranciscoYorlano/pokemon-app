@@ -225,7 +225,13 @@ input:focus {
 
     /* FIRST ROW */
     .rowDouble {
-        margin-top: 0.5rem;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .textInput {
+        margin-top: 0rem;
+        width: 100%;
     }
 }
 
