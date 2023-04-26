@@ -122,6 +122,7 @@ const Header = (props) => {
                 <Link
                     to="https://www.linkedin.com/in/francisco-yorlano/"
                     target="_blank"
+                    rel="noreferrer"
                 >
                     <svg
                         width="2.5rem"
@@ -154,6 +155,7 @@ const Header = (props) => {
                 <Link
                     to="https://github.com/FranciscoYorlano/PI-Pokemon-v2.0"
                     target="_blank"
+                    rel="noreferrer"
                 >
                     <svg
                         width="2rem"

@@ -10,6 +10,7 @@ const Footer = () => {
                     <a
                         href="https://github.com/FranciscoYorlano"
                         target="_blank"
+                        rel="noreferrer"
                     >
                         Francisco Yorlano
                     </a>
@@ -19,12 +20,14 @@ const Footer = () => {
                 <a
                     href="https://github.com/FranciscoYorlano/PI-Pokemon-v2.0"
                     target="_blank"
+                    rel="noreferrer"
                 >
                     GitHub
                 </a>
                 <a
                     href="https://www.linkedin.com/in/francisco-yorlano/"
                     target="_blank"
+                    rel="noreferrer"
                 >
                     LinkedIn
                 </a>
