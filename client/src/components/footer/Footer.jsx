@@ -17,7 +17,7 @@ const Footer = () => {
             </div>
             <div className={styles.right}>
                 <a
-                    href="https://github.com/FranciscoYorlano/pokemon-pi"
+                    href="https://github.com/FranciscoYorlano/PI-Pokemon-v2.0"
                     target="_blank"
                 >
                     GitHub
