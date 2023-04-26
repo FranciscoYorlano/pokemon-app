@@ -239,6 +239,7 @@ const rootReducer = (state = initialState, action) => {
                             state.filters.bySource
                         ),
                         sort: action.payload,
+                        currentPage: 1,
                     };
                 case SORTS.ALPHABETICAL_ASC:
                     orderedPokemons.sort((a, b) =>
@@ -263,6 +264,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 pokemons: orderedPokemons,
                 sort: action.payload,
+                currentPage: 1,
             };
         // Search - Favorites set - Reset
         case POKEMONS_BY_NAME_GET:
