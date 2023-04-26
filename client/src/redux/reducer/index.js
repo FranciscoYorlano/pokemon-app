@@ -278,6 +278,7 @@ const rootReducer = (state = initialState, action) => {
                     bySource: BY_SOURCE.ALL_SOURCES,
                 },
                 sort: SORTS.DEFAULT,
+                currentPage: 1,
             };
         case USER_FAVORITES_SET:
             return {
@@ -289,6 +290,7 @@ const rootReducer = (state = initialState, action) => {
                     bySource: BY_SOURCE.ALL_SOURCES,
                 },
                 sort: SORTS.DEFAULT,
+                currentPage: 1,
             };
         case POKEMONS_RESET:
             return {
