@@ -119,8 +119,6 @@ const applyFilters = (allPokemons, byType, bySource) => {
 // ======================== Root Reducer
 
 const rootReducer = (state = initialState, action) => {
-    console.log(state);
-    console.log(action);
     switch (action.type) {
         // Location ==============================================
         case LOCATION_SET:
@@ -230,7 +228,6 @@ const rootReducer = (state = initialState, action) => {
                         pokemonBaseToFilterSortDefault = state.userPokemons;
                     if (state.location === PAGES.SEARCH)
                         pokemonBaseToFilterSortDefault = state.pokemonsByName;
-                    console.log(pokemonBaseToFilterSortDefault);
                     return {
                         ...state,
                         pokemons: applyFilters(

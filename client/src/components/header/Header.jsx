@@ -56,7 +56,6 @@ const Header = (props) => {
         if (window.pageYOffset > window.innerHeight * 0.4) {
             setOpacity(0.7);
         } else {
-            console.log(opacity);
             setOpacity(window.pageYOffset / (window.innerHeight * 0.4) / 1.42);
         }
     };
