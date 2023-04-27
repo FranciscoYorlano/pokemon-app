@@ -87,17 +87,10 @@ const getAllPokemons = async () => {
 };
 
 const getPokemonsByName = async (name) => {
-    console.log(name);
     const pokemonsDb = await Pokemon.findAll({
         where: { name: { [Op.iLike]: name } },
         include: Type,
     });
-    console.log(
-        await Pokemon.findAll({
-            include: Type,
-        })
-    );
-    console.log(pokemonsDb);
 
     const pokemons = pokemonsDb.map((pokemon) =>
         dbPokemonTemplateCreator(pokemon)
@@ -115,7 +108,6 @@ const getPokemonsByName = async (name) => {
     if (pokemons.length === 0) {
         throw new Error(`Name "${name}" not found.`);
     }
-    console.log(pokemons);
     return pokemons;
 };
 
