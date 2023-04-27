@@ -21,7 +21,8 @@ import {
 } from "../../redux/actions";
 
 const Home = (props) => {
-    const { pokemons, userPokemons, currentPage, pokemonsPerPage } = props;
+    const { pokemons, userPokemons, currentPage, pokemonsPerPage, userData } =
+        props;
     const { setUserFavorites, resetPokemons } = props;
 
     // Redux
@@ -55,7 +56,7 @@ const Home = (props) => {
                 <div className={styles.textContainer}>
                     {!isHome && (
                         <button className={styles.buttonPrimary}>
-                            franyorlano's collection
+                            {userData.username}'s collection
                         </button>
                     )}
                 </div>
