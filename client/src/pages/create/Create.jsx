@@ -188,6 +188,7 @@ const Create = () => {
         } else {
             const pokemonToCreate = {
                 ...newPokemon,
+                name: newPokemon.name.trim(),
                 types: newPokemon.types.map((type) => Number(type.id)),
             };
             dispatch(createPokemon(pokemonToCreate));

@@ -80,7 +80,7 @@ const Header = (props) => {
             resetPokemons();
         } else {
             setLocation(PAGES.SEARCH);
-            getPokemonsByName(name);
+            getPokemonsByName(name.trim());
         }
     };
 
