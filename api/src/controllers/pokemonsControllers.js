@@ -100,6 +100,7 @@ const getPokemonsByName = async (name) => {
         const response = await axios.get(
             `${EXT_API_URL}/pokemon/${name.toLowerCase()}`
         );
+        console.log(response.data.name);
         if (response.data.name) {
             pokemons.push(apiPokemonTemplateCreator(response.data));
         }
@@ -108,6 +109,7 @@ const getPokemonsByName = async (name) => {
     if (pokemons.length === 0) {
         throw new Error(`Name "${name}" not found.`);
     }
+    console.log(pokemons);
     return pokemons;
 };
 
