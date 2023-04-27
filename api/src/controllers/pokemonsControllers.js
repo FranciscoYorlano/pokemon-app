@@ -94,7 +94,6 @@ const getPokemonsByName = async (name) => {
     });
     console.log(
         await Pokemon.findAll({
-            where: { name: name },
             include: Type,
         })
     );
