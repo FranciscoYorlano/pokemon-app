@@ -91,6 +91,7 @@ const getPokemonsByName = async (name) => {
         where: { name: { [Op.iLike]: name } },
         include: Type,
     });
+    console.log(pokemonsDb);
 
     const pokemons = pokemonsDb.map((pokemon) =>
         dbPokemonTemplateCreator(pokemon)
@@ -100,7 +101,6 @@ const getPokemonsByName = async (name) => {
         const response = await axios.get(
             `${EXT_API_URL}/pokemon/${name.toLowerCase()}`
         );
-        console.log(response.data.name);
         if (response.data.name) {
             pokemons.push(apiPokemonTemplateCreator(response.data));
         }
