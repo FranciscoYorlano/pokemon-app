@@ -91,7 +91,7 @@ const initialState = {
     signInError: "",
 };
 
-// ======================== Apply filters function
+// ======================== Apply filters / sort function
 const applyFilters = (allPokemons, byType, bySource) => {
     let filteredPokemons = [...allPokemons];
 
@@ -114,6 +114,29 @@ const applyFilters = (allPokemons, byType, bySource) => {
     }
 
     return filteredPokemons;
+};
+
+const applySort = (pokemons, sort) => {
+    let sortedPokemons = [...pokemons];
+
+    switch (sort) {
+        case SORTS.ALPHABETICAL_ASC:
+            sortedPokemons.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case SORTS.ALPHABETICAL_DESC:
+            sortedPokemons.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        case SORTS.ATTACK_ASC:
+            sortedPokemons.sort((a, b) => a.attack - b.attack);
+            break;
+        case SORTS.ATTACK_DESC:
+            sortedPokemons.sort((a, b) => b.attack - a.attack);
+            break;
+        default:
+            break;
+    }
+
+    return sortedPokemons;
 };
 
 // ======================== Root Reducer
@@ -171,6 +194,11 @@ const rootReducer = (state = initialState, action) => {
                 );
             }
 
+            filteredPokemonsByType = applySort(
+                filteredPokemonsByType,
+                state.sort
+            );
+
             return {
                 ...state,
                 pokemons: filteredPokemonsByType,
@@ -207,6 +235,11 @@ const rootReducer = (state = initialState, action) => {
                     action.payload
                 );
             }
+
+            filteredPokemonsBySource = applySort(
+                filteredPokemonsBySource,
+                state.sort
+            );
 
             return {
                 ...state,
