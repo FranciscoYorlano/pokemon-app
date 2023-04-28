@@ -171,9 +171,36 @@ const rootReducer = (state = initialState, action) => {
                 );
             }
 
+            let filteredAndSortedPokemons = [filteredPokemonsByType];
+
+            switch (state.sort) {
+                case SORTS.DEFAULT:
+
+                case SORTS.ALPHABETICAL_ASC:
+                    filteredAndSortedPokemons.sort((a, b) =>
+                        a.name.localeCompare(b.name)
+                    );
+                    break;
+                case SORTS.ALPHABETICAL_DESC:
+                    filteredAndSortedPokemons.sort((a, b) =>
+                        b.name.localeCompare(a.name)
+                    );
+                    break;
+                case SORTS.ATTACK_ASC:
+                    filteredAndSortedPokemons.sort(
+                        (a, b) => a.attack - b.attack
+                    );
+                    break;
+                case SORTS.ATTACK_DESC:
+                    filteredAndSortedPokemons.sort(
+                        (a, b) => b.attack - a.attack
+                    );
+                    break;
+            }
+
             return {
                 ...state,
-                pokemons: filteredPokemonsByType,
+                pokemons: filteredAndSortedPokemons,
                 filters: {
                     ...state.filters,
                     byType: action.payload,
