@@ -207,7 +207,6 @@ const rootReducer = (state = initialState, action) => {
                     byType: action.payload,
                 },
                 currentPage: 1,
-                sort: SORTS.DEFAULT,
             };
         case POKEMONS_FILTER_BY_SOURCE:
             let filteredPokemonsBySource = [];
@@ -249,7 +248,6 @@ const rootReducer = (state = initialState, action) => {
                     bySource: action.payload,
                 },
                 currentPage: 1,
-                sort: SORTS.DEFAULT,
             };
         case POKEMONS_SORT:
             let orderedPokemons = [...state.pokemons];
