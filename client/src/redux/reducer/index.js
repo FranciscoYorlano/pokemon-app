@@ -175,7 +175,7 @@ const rootReducer = (state = initialState, action) => {
 
             switch (state.sort) {
                 case SORTS.DEFAULT:
-
+                    break;
                 case SORTS.ALPHABETICAL_ASC:
                     filteredAndSortedPokemons.sort((a, b) =>
                         a.name.localeCompare(b.name)
